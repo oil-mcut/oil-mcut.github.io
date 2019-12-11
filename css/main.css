@@ -1,0 +1,20 @@
+/* Base */
+/* ----------------------------------------------------------*/
+.header {
+    margin: auto;
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 32px;
+  }
+  
+.module-header {
+    font-size: 24px;
+    color:#8C1515;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+
+.materials-item{
+    font-size: 20px;
+    color: #f8c377;
+}
