@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Chapter 3
-permalink: /Chapter 3/
+permalink: /Chapter-3/
 ---
 
 # Hands-on Image Processing with Python
@@ -129,7 +129,6 @@ pylab.show()
 **The Gaussian LPF kernel spectrum in 2D**
 
 <p>The next code block shows how to plot the spectrum of a Gaussian kernel in 2D with the log transform:</p>
-
 ```python
 im = rgb2gray(imread('../images/lena.jpg'))
 im.shape
@@ -798,7 +797,6 @@ The screenshot shows the output of the preceding code block, the restored image 
 <img src="./images/ch-3-4.png" >
 
 <p>In the next few sections, we will describe a couple of degradation models (namely _***inverse***_ and Wiener filters).</p>
-
 ### Deconvolution and inverse filtering with FFT
 
 Given a blurred image **with a known (assumed) blur kernel**, a typical image processing task is to **get back (at least an approximation of) the original image**. This particular task is known as _***deconvolution***_. One of the naive filters that can be applied in the frequency domain to achieve this is the inverse filter that we are going to discuss in this section. 
