@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Chapter 3
-permalink: /Chapter-3/
+permalink: /chapter-3/
 ---
 
 # Hands-on Image Processing with Python
