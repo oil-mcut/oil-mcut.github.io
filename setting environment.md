@@ -1,4 +1,5 @@
 ---
+layout: page
 title: Setting Environment
 permalink: /setting-environment/
 ---
