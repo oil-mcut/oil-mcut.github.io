@@ -7,7 +7,7 @@ h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: 400; }
   /* border-bottom: 1px solid #e8e8e8; */
     padding: 10px;
     text-align: center;
-    background: #1abc9c;
+    background-color: #1abc9c;
     color: white;
     font-size: 30px;
 } 
