@@ -1,12 +1,10 @@
 /* Base */
 /* ----------------------------------------------------------*/
-.header {
-    margin: auto;
-    background-color: #F1F1F1;
-    text-align: center;
-    padding: 32px;
-  }
-  
+.site-header {
+  border-bottom: 1px solid #e8e8e8;
+  min-height: 56px;
+  background-color: #8C1515;
+} 
 .module-header {
     font-size: 24px;
     color:#8C1515;
