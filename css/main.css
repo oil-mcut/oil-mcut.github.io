@@ -2,6 +2,8 @@
 /* ----------------------------------------------------------*/
 .site-header {
   /* border-bottom: 1px solid #e8e8e8; */
+  text-align: center;
+  font-size: 32px;
   min-height: 56px;
   color:#828282 ;
   background-color: #1abc9c;
