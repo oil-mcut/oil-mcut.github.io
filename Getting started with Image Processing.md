@@ -104,7 +104,7 @@ plt.show()
 
 
 
-![png](/Chapter1/output_13_1.png)
+![png](img/Chapter1/output_13_1.png)
 
 
 The next code snippet changes the image to a darker image ***by first setting all of the pixel values below 0.5 to 0*** and then saving the numpy ndarray to disk. The saved image is again reloaded and displayed:
@@ -127,7 +127,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_15_0.png)
+![png](img/Chapter1/output_15_0.png)
 
 
 ### Interpolating while displaying with matplotlib imshow
@@ -148,7 +148,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_18_0.png)
+![png](img/Chapter1/output_18_0.png)
 
 
 ### Reading, saving, and displaying an image using scikit-image
@@ -171,7 +171,7 @@ plt.axis('off'), skim_io.imshow(im), skim_io.show()
 
 
 
-![png](/Chapter1/output_21_1.png)
+![png](img/Chapter1/output_21_1.png)
 
 
 
@@ -194,7 +194,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_24_0.png)
+![png](img/Chapter1/output_24_0.png)
 
 
 
@@ -216,7 +216,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_28_0.png)
+![png](img/Chapter1/output_28_0.png)
 
 
 
@@ -245,7 +245,7 @@ plt.show()
 
 
 
-![png](/Chapter1/output_31_1.png)
+![png](img/Chapter1/output_31_1.png)
 
 
 ### Converting from one file format to another
@@ -308,7 +308,7 @@ plt.show()
 
 
 
-![png](/Chapter1/output_40_1.png)
+![png](img/Chapter1/output_40_1.png)
 
 
 ### Converting from one color space into another
@@ -338,7 +338,7 @@ plt.show()
 
 
 
-![png](/Chapter1/output_44_1.png)
+![png](img/Chapter1/output_44_1.png)
 
 
 Similarly, we can convert the image into the YUV color space using the <span class="burk">rgb2yuv()</span> function
@@ -359,7 +359,7 @@ skim_io.show()
 ```
 
 
-![png](/Chapter1/output_48_0.png)
+![png](img/Chapter1/output_48_0.png)
 
 
 
@@ -415,13 +415,13 @@ plt.show()
 
 
 
-![png](/Chapter1/output_52_1.png)
+![png](img/Chapter1/output_52_1.png)
 
 
 ### Simple image morphing - α-blending of two images using cross-dissolving
 
 The following code block shows how to start from one face image (image1 being the face of Messi) and end up with another image (image2 being the face of Ronaldo) by using a linear combination of the two image numpy ndarrays given with the following equation
-<img src="/images/eq-1.png" >
+<img src="./images/eq-1.png" >
 We do this by iteratively increasing α from 0 to 1
 
 The next figure shows the sequence of the α-blended images created using the previous code by cross-dissolving Messi's face image into Ronaldo's. As can be seen from the sequence of intermediate images in the figure, the face morphing with simple blending is not very smooth. In upcoming chapters, we shall see more advanced techniques for image morphing
@@ -442,7 +442,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_56_0.png)
+![png](img/Chapter1/output_56_0.png)
 
 
 ### Image manipulations with PIL
@@ -462,7 +462,7 @@ plt.show()
 
 
 
-![png](/Chapter1/output_59_1.png)
+![png](img/Chapter1/output_59_1.png)
 
 
 ### Cropping an image
@@ -479,7 +479,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_62_0.png)
+![png](img/Chapter1/output_62_0.png)
 
 
 ### Resizing an image
@@ -551,7 +551,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_72_0.png)
+![png](img/Chapter1/output_72_0.png)
 
 
 ### Converting an image into grayscale
@@ -567,7 +567,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_75_0.png)
+![png](img/Chapter1/output_75_0.png)
 
 
 ### Log transformation
@@ -583,7 +583,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_78_0.png)
+![png](img/Chapter1/output_78_0.png)
 
 
 ### Power-law transformation
@@ -599,7 +599,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_81_0.png)
+![png](img/Chapter1/output_81_0.png)
 
 
 ### Reflecting an image
@@ -615,7 +615,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_84_0.png)
+![png](img/Chapter1/output_84_0.png)
 
 
 
@@ -640,7 +640,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_88_0.png)
+![png](img/Chapter1/output_88_0.png)
 
 
 ### Applying an Affine transformation on an image
@@ -673,7 +673,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_94_0.png)
+![png](img/Chapter1/output_94_0.png)
 
 
 ### Changing pixel values of an image
@@ -695,7 +695,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_97_0.png)
+![png](img/Chapter1/output_97_0.png)
 
 
 ### Drawing on an image
@@ -717,7 +717,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_100_0.png)
+![png](img/Chapter1/output_100_0.png)
 
 
 ### Drawing text on an image
@@ -743,7 +743,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_103_0.png)
+![png](img/Chapter1/output_103_0.png)
 
 
 ### Creating a thumbnail
@@ -765,7 +765,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_106_0.png)
+![png](img/Chapter1/output_106_0.png)
 
 
 ### Computing the basic statistics of an image
@@ -830,7 +830,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_116_0.png)
+![png](img/Chapter1/output_116_0.png)
 
 
 ### Separating the RGB channels of an image
@@ -853,7 +853,7 @@ plt.show() # show the R, G, B channels
 ```
 
 
-![png](output_120_0.png)
+![png](img/Chapter1/output_120_0.png)
 
 
 ### Combining multiple channels of an image
@@ -870,13 +870,15 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_123_0.png)
+![png](img/Chapter1/output_123_0.png)
 
 
 ### α-blending two images
 
 The blend() function can be used to create a new image by interpolating two given images (of the same size) using a constant, α. Both images must have the same size and mode. The output image is given by the following
-<img src="../images/eq-2.png" >
+
+<img src="./images/eq-2.png" >
+
 <p>If α is 0.0, a copy of the first image is returned. If α is 1.0, a copy of the second image is returned. The next code snippet shows an example</p>
 ```python
 im1 = pil.Image.open("../images/parrot.png")
@@ -890,7 +892,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_126_0.png)
+![png](img/Chapter1/output_126_0.png)
 
 
 ### Superimposing two images
@@ -908,7 +910,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_129_0.png)
+![png](img/Chapter1/output_129_0.png)
 
 
 ### Adding two images
@@ -924,7 +926,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_132_0.png)
+![png](img/Chapter1/output_132_0.png)
 
 
 ### Computing the difference between two images
@@ -951,7 +953,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_135_0.png)
+![png](img/Chapter1/output_135_0.png)
 
 
 ### Inverse warping and geometric transformation using the warp() function
@@ -973,7 +975,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_138_0.png)
+![png](img/Chapter1/output_138_0.png)
 
 
 ### Applying the swirl transform
@@ -990,7 +992,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_141_0.png)
+![png](img/Chapter1/output_141_0.png)
 
 
 ### Adding random Gaussian noise to images
@@ -1013,7 +1015,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_144_0.png)
+![png](img/Chapter1/output_144_0.png)
 
 
 ### Drawing contour lines for an image
@@ -1035,7 +1037,7 @@ plt.show()
 ```
 
 
-![png](/Chapter1/output_147_0.png)
+![png](img/Chapter1/output_147_0.png)
 
 
 ### Summary  
