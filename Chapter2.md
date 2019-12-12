@@ -98,7 +98,7 @@ As we can see, the output image, created with the nearest-neighbor method, is 25
 
 <p>Notice how the quality improves when bi-linear interpolation is used with up-sampling.</p>
 <p>Let's consider a grayscale image, which is basically a 2D matrix of pixel values at integer grid locations. To interpolate the pixel value at any point P on the grid, the 2D analogue of linear interpolation: bilinear interpolation can be used. In this case, for each possible point P (that we would like to interpolate), four neighbors (namely, Q11, Q12, Q22, and Q21) are going to be there and the intensity values of these four neighbors are to be combined to compute the interpolated intensity at the point P, as shown in the following figure</p>
-<img src="images/bi-linier.png" >
+![png](images/bi-linier.png")
 
 
 ```python
