@@ -15,10 +15,21 @@
     margin-bottom: 5px;
   }
 
-.materials-item{
-    color: #f8c377;
-}
-
+  .materials-wrap {
+    font-size: 18px;
+  }
+  .materials-item a{
+    color: #333;
+    display: block;
+    padding: 3px;
+  }
+  .materials-item {
+    border-bottom: 1px solid #CCC;
+  }
+  .materials-item:nth-child(even) {
+    background-color: #f7f6f1;
+  }
+  
 .wrap {
   max-width: 1000px;
   padding: 0 30px;
@@ -72,6 +83,12 @@
   border: 0;
   padding-right: 0;
   padding-left: 0;
+}
+
+.kw {
+  font-size: 16px;
+  color: #08A;
+  margin-left: 10px;
 }
 
 /* terminal */
