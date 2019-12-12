@@ -93,7 +93,7 @@
 /* terminal */
 .post pre.terminal {
   border: 1px solid #000;
-  background-color: #333;
+  background-color: rgb(122, 90, 90);
   color: #FFF;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
