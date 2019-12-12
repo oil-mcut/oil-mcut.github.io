@@ -863,7 +863,7 @@ plt.show()
 
 The blend() function can be used to create a new image by interpolating two given images (of the same size) using a constant, α. Both images must have the same size and mode. The output image is given by the following
 
-<img src="images/eq-2.png" >
+![png](images\eq-1.png)
 
 <p>If α is 0.0, a copy of the first image is returned. If α is 1.0, a copy of the second image is returned. The next code snippet shows an example</p>
 ```python

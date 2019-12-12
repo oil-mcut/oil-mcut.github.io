@@ -18,7 +18,7 @@ The topics to be covered in this chapter are as follows:
 
 **Point-wise intensity transformations – pixel transformation**
 <p>As discussed in the Chapter 1, Getting Started with Image Processing, the point-wise intensity transformation operation applies a transfer function, T, to each pixel, f(x,y), of the input image to generate a corresponding pixel in the output image. The transformation can be expressed as g(x,y) = T(f(x,y)) or, equivalently, s = T(r), where r is the gray-level of a pixel in the input image and s is the transformed gray-level of the same pixel in the output image. It's a memory-less operation, and the output intensity at the location,(x, y), depends only on the input intensity at the same point. Pixels of the same intensity get the same transformation. This does not bring in new information and may cause loss of information, but can improve the visual appearance or make features easier to detect—that is why these transformations are often applied at the pre-processing step in the image processing pipeline. The following screenshot shows the point processing, as well as the mask/kernel processing (for spatial filters that consider neighborhood pixels also for transformation, as we have already seen):</p>
-<img src=" images/ch-4-1.png" width="500" height="400"  />
+![png](images/ch-4-1.png)
 
 <p>Some popular intensity transformations are the following:</p>
    1. Image negatives
@@ -136,7 +136,7 @@ pylab.show()
 
 The contrast stretching operation takes a low-contrast image as input and stretches the narrower range of the intensity values to span a desired wider range of values in order to output a high-contrast output image, thereby enhancing the image's contrast. It is just a linear scaling function that is applied to image pixel values, and hence the image enhancement is less drastic (than its more sophisticated counterpart histogram equalization, to be described shortly). The following screenshot shows the point transformation function for contrast stretching:
 
-<img src="images/ch-4-2.png" >
+![png](images/ch-4-2.png)
 
 As can be seen from the previous screenshot, the upper and lower pixel value limits (over which the image is to be normalized), need to be specified before the stretching can be performed (for example, for a gray-level image, the limits are often set to 0 and 255, in order for the output image to span the entire range of available pixel values). All we need to find is a suitable value of m from the CDF of the original image. The contrast stretching transform produces higher contrast than the original by darkening the levels below the value m (in other words, stretching the values toward the lower limit) in the original image and brightening the levels previous to value m (stretching the values toward the upper limit) in the original image. The following sections describe how to implement contrast-stretching using the PIL library.
 
@@ -167,7 +167,7 @@ The picture above shows the output of the previous code block. As can be seen, t
 
 The contrast stretching operation stretches the over-concentrated gray-levels. The transfer function can be thought of as a piece-wise linear function, where the slope in the stretching region is greater than one. This can be seen from the following screenshot
 
-<img src="images/ch-4-3.png" width=250 height=250 >
+![png](images/ch-4-3.png)
 
 The following code block shows how the PIL point()function can be used to implement contrast stretching. The transfer function is defined by the contrast() function as a piece wise linear function
 
@@ -219,11 +219,11 @@ The picture above shows the output of the code. As can be seen, the contrast of 
 
 This is a point operation that creates binary images from gray-level ones by turning all pixels below some threshold to zero and all pixels above that threshold to one, as shown in the following screenshot
 
-<img src="images/ch-4-4.png" >
+![png](images/ch-4-4.png)
 
 If g(x, y) is a thresholded version of f(x, y) at some global threshold T, then the following can be applied
 
-<img src="images/eq-4-1.png" width="500" height="100" />
+![png](images/eq-4-1.png)
 
 Why do we need a binary image? A few reasons are, for example, that we may be interested in separating an image into foreground and background; that the image is to be printed with a black and white printer (and all the shades of gray need to be represented using black and white dots only); or that we want to pre-process the image with morphological operations, as we shall discuss later in this chapter.
 
@@ -249,11 +249,11 @@ pylab.show()
 ```
 
 
-![png](output_23_0.png)
+![png](img/Chapter4/output_23_0.png)
 
 
 
-![png](output_23_1.png)
+![png](img/Chapter4/output_23_1.png)
 
 
 The screenshots show the output of the previous code. First, we can see the distribution of the pixel values in the input image.
@@ -287,7 +287,7 @@ Notice that even though the resulting binary images are somewhat noisy, the fals
 
 Again, in order to prevent large-scale patterns (such as false contours), an intentionally applied form of noise is used to randomize the quantization error. This process is known as dithering. The Floyd-Steinberg algorithm implements dithering using the error diffusion technique—in other words, it pushes (adds) the residual quantization error of a pixel onto its neighboring pixels, to be dealt with later. It spreads the quantization error out according to the distribution shown in the following screenshot, as a map of the neighboring pixels
 
-<img src="images/ch-4-5.png" >
+![png](images/ch-4-5.png)
 
 In the previous screenshot, the current pixel is represented with a star (*) and the blank pixels represent the previously-scanned pixels. The algorithm scans the image from left to right and top to bottom. It sequentially quantizes the pixel values one by one, each time the quantization error is distributed among the neighboring pixels (yet to be scanned), while not affecting the pixels that already got quantized. Hence, if a number of pixels have been rounded downward, it becomes more likely that the following pixel will be rounded upward by the algorithm so that the average quantization error is close to zero
 
@@ -301,7 +301,7 @@ Histogram processing techniques can be more powerful by employing non-linear (an
 
 Histogram equalization uses a monotonic and a non-linear mapping which reassigns the pixel intensity values in the input image in such a way that the output image has a uniform distribution of intensities (a flat histogram), and thereby enhances the contrast of the image. The following screenshot describes the transformation function for histogram equalization:
 
-<img src="images/ch-4-6.png" width=400 height=150>
+![png](images/ch-4-6.png)
 
 The following code block shows how to use the exposure module's equalize_hist() function to do histogram equalization with scikit-image. The histogram equalization implementation has two different flavors: one is a global operation over the entire image, while the second is local (adaptive) and done by dividing the image into blocks and running histogram equalization on each of them:
 
@@ -418,7 +418,7 @@ Histogram matching is a process where an image is altered in such a way that its
 3. The xi pixel value has a cumulative histogram value given by G(xi). Find a pixel value, xj,so that the cumulative distribution value in the reference image, namely H(xj), is equal to G(xi).
 4. The input data value xi is replaced by xj:
 
-<img src=" images/ch-4-7.png" width=500 height=250 />
+![png](images/ch-4-7.png)
 
 The following code block shows how histogram matching can be implemented using Pytho
 

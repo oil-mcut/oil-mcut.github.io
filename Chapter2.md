@@ -98,7 +98,7 @@ As we can see, the output image, created with the nearest-neighbor method, is 25
 
 <p>Notice how the quality improves when bi-linear interpolation is used with up-sampling.</p>
 <p>Let's consider a grayscale image, which is basically a 2D matrix of pixel values at integer grid locations. To interpolate the pixel value at any point P on the grid, the 2D analogue of linear interpolation: bilinear interpolation can be used. In this case, for each possible point P (that we would like to interpolate), four neighbors (namely, Q11, Q12, Q22, and Q21) are going to be there and the intensity values of these four neighbors are to be combined to compute the interpolated intensity at the point P, as shown in the following figure</p>
-![png](images/bi-linier.png")
+![png](images/bi-linier.png)
 
 
 ```python
@@ -303,8 +303,7 @@ As can be seen, although the color-quantization reduces image size (since the n
 <P>The Fourier transform method has a long mathematical history and we are not going to discuss it here (it can be found in any digital signal processing or digital image processing theory book). As far as image processing is concerned, we shall focus only on 2D Discrete Fourier Transform (DFT). The basic idea behind the Fourier transform method is that an image can be thought of as a 2D function, f, that can be expressed as a weighted sum of sines and cosines (Fourier basic functions) along two dimensions.</P>
 <P>We can transition from a set of grayscale pixel values in the image (spatial/time domain) to a set of Fourier coefficients (frequency domain) using the DFT, and it is discrete since the spatial and the transform variables to be used can only take a set of discrete consecutive integer values (typically the locations of a 2D array representing the image).</P>
 <P>In a similar way, the frequency domain 2D array of Fourier coefficients can be converted back into the spatial domain using the Inverse Discrete Fourier Transform (IDFT), which is also known as reconstruction of the image using the Fourier coefficients. The DFT and IDFT are mathematically defined as follows:</P>
-<img src="images/eq-3.png" >
-
+![png](images/eq-3.png)
 
 **Why do we need the DFT?**
 
@@ -448,7 +447,7 @@ pylab.show()
 ### Understanding convolution
 <p> Convolution is an operation that operates on two images, one being an input image and the other one being a mask (also called the kernel) as a filter on the input image, producing an output image. </p>
 <p>  Convolution filtering is used to modify the spatial frequency characteristics of an image. It works by determining the value of a central pixel by adding the weighted values of all of its neighbors together to compute the new value of the pixel in the output image. The pixel values in the output image are computed by traversing the kernel window through the input image, as shown in the next screenshot (for convolution with the valid mode; we'll see convolution modes later in this chapter):</p>
-<img src="./images/ch-2-1.png" >
+![png](images/ch-2-1.png)
 
 **see graphics on textbook**
 
@@ -576,7 +575,7 @@ pylab.show()
 <p>Correlation is very similar to the convolution operation in the sense that it also takes an input image and another kernel and traverses the kernel window through the input by computing a weighted combination of pixel neighborhood values with the kernel values and producing the output image.</p>
 <p> The only difference is that, unlike correlation, convolution flips the kernel twice (with regards to the horizontal and vertical axis) before computing the weighted combination.</p>
 <p> The next diagram mathematically describes the difference between correlation and convolution on an image:</p>
-<img src="./images/eq-4.png" >
+![png](images/eq-4.png)
 
 The SciPy signal module's correlated2d() function can be used for correlation. **Correlation is similar to convolution if the kernel is symmetric**.But **if the kernel is not symmetric**, in order to get the same results as with convolution2d(), before placing the kernel onto the image, one must flip it upside-down and left-to-right.This is illustrated in the following screenshot; you can go ahead and write code for this in order to get this output now that you know the logic! Use the lena_g image as input and apply an asymmetric 3 x 3 ripple kernel ([[0,-1,√2],[1,0,-1],[-√2,1,0]]) onto it separately with correlation2d()and convolution2d()
 

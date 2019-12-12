@@ -46,27 +46,27 @@ Every node or neuron represents a small aspect of the whole image. When put toge
 Let's now see the differences between a ML and a deep learning model when used in image classification diagrammatically (cat versus dog images).
 
 Traditional ML will have feature extraction and a classifier to give a solution to any problem
-<img src="images/ch-10-1.png" >
+![png](images/ch-10-1.png)
 With deep learning, you can see the hidden layers that we talked about and the decision making in action
-<img src="images/ch-10-2.png" >
+![png](images/ch-10-2.png)
 
 ### Why deep learning?                                                        
 As discussed earlier, if you have more data, the best choice would be deep networks that perform much better with ample data. Many a time, the more data used, the more accurate the result. The classical ML method needs a complex set of ML algorithms and more data is only going to hamper its accuracy. Complex methods then need to be applied to make up for the less accuracy. Moreover, even learning is affected—it is almost stopped at some point in time when more training data is added to train the model.
 This is how this can be depicted graphically
-<img src="images/ch-10-3.png" >
+![png](images/ch-10-3.png)
 
 ### CNNs                                                        
 CNNs are deep neural networks for which the primarily used input is images. CNNs learn the filters (features) that are hand-engineered in traditional algorithms. This independence from prior knowledge and human effort in feature design is a major advantage. They also reduce the number of parameters to be learned with their shared-weights architecture and possess translation invariance characteristics. In the next subsection, we'll discuss the general architecture of a CNN and how it works
 
 ### Conv or pooling or FC layers – CNN architecture and how it works                                                        
 The next screenshot shows the typical architecture of a CNN. It consists of one or more convolutional layer, followed by a nonlinear ReLU activation layer, a pooling layer, and, finally, one (or more) fully connected (FC) layer, followed by an FC softmax layer, for example, in the case of a CNN designed to solve an image classification problem.There can be multiple convolution ReLU pooling sequences of layers in the network, making the neural network deeper and useful for solving complex image processing tasks, as seen in the following diagram
-<img src=" images/ch-10-4.png" >
+![png](images/ch-10-4.png)
 The next few sections describe each of the layers and how they work.
 
 ### Convolutional layer                                                        
 
 The main building block of CNN is the convolutional layer. The convolutional layer consists of a bunch of convolution filters (kernels), which we already discussed in detail in Chapter 2, Sampling, Fourier Transform, and Convolution. The convolution is applied on the input image using a convolution filter to produce a feature map. On the left side is the input to the convolutional layer; for example, the input image. On the right is the convolution filter, also called the kernel. As usual, the convolution operation is performed by sliding this filter over the input. At every location, the sum of element-wise matrix multiplication goes into the feature map. A convolutional layer is represented by its width, height (the size of a filter is width x height), and depth (number of filters). Stride specifies how much the convolution filter will be moved at each step (the default value is 1). Padding refers to the layers of zeros to surround the input (generally used to keep the input and output image size the same, also known as same padding). The following screenshot shows how 3 x 3 x 3 convolution filters are applied on an RGB image, the first with valid padding and the second with the computation with two such filters with the size of the stride=padding=1
-<img src="images/ch-10-5.png" >
+![png](images/ch-10-5.png)
 
 ### Pooling layer                                                        
 After a convolution operation, a pooling operation is generally performed to reduce dimensionality and the number of parameters to be learned, which shortens the training time, requires less data to train, and combats overfitting. Pooling layers downsample each feature map independently, reducing the height and width, but keeping the depth intact. The most common type of pooling is max pooling, which just takes the maximum value in the pooling window. Contrary to the convolution operation, pooling has no parameters. It slides a window over its input and simply takes the max value in the window. Similar to a convolution, the window size and stride for pooling can be specified.
@@ -85,7 +85,7 @@ In this section, we shall revisit the problem of handwritten digits classificati
 
 ### Classification of MNIST using FC network with TF
 First, we shall start with a very simple deep neural network, one containing only a single FC hidden layer (with ReLU activation) and a softmax FC layer, with no convolutional layer. The next screenshot shows the network upside down. The input is a flattened image containing 28 x 28 nodes and 1,024 nodes in the hidden layer and 10 output nodes, corresponding to each of the digits to be classified
-<img src="images/ch-10-6.png" >
+![png](images/ch-10-6.png)
 Now let's implement the deep learning image classification with TF. First, we need to load the mnist dataset and divide the training images into two parts, the first one being the larger (we use 50k images) for training, and the second one (10k images) to be used for validation. Let's reformat the labels to represent the image classes with one-hot encoded binary vectors. Then the tensorflow graph needs to be initialized along with the variable, constant, and placeholder tensors. A mini-batch stochastic gradient descent (SGD) optimizer is to be used as the learning algorithm with a batch size of 256, to minimize the softmax cross-entropy logit loss function with L2 regularizers on the couple of weights layers (with hyperparameter values of λ1=λ2=1). Finally, the TensorFlow session object will be run for 6k steps (mini-batches) and the forward/backpropagation will be run to update the model (weights) learned, with subsequent evaluation of the model on the validation dataset. As can be seen, the accuracy obtained after the final batch completes is 96.5%
 
 
@@ -833,7 +833,7 @@ plot_model(model, to_file='model.png')
 ```
 
 The following screenshot shows the output of the previous code block, the neural network architecture
-<img src=" images/ch-10-7.png" >
+![png](images/ch-10-7.png)
 
 **Visualizing the weights in the intermediate layers**                                                         
 Now, let's visualize the weights learned in the intermediate layers. The following Python code visualizes the weights learned for the first 200 hidden units at the first dense layer
@@ -870,11 +870,11 @@ plot_model(model, to_file='../images/keras_model.png')
 ### Some popular deep CNNs
 In this section, let's discuss popular deep CNNs (for example, VGG-18/19, ResNet, and InceptionNet) used for image classification. The following screenshot shows single-crop accuracies (top-1 accuracy: how many times the correct label has the highest probability predicted by the CNN) of the most relevant entries submitted to the ImageNet challenge, from AlexNet (Krizhevsky et al., 2012), on the far left, to the best performing, Inception-v4 (Szegedy et al., 2016)
 
-<img src="images/ch-10-8.png" >
+![png](images/ch-10-8.png)
 
 ### VGG-16/19 
 The following screenshot shows the architecture of a popular CNN called VGG-16/19. The remarkable thing about the VGG-16 net is that, instead of having so many hyper-parameters, it lets you use a much simpler network where you focus on just having convolutional layers that are just 3 x 3 filters with a stride of 1 and that always use the same padding and make all the max pooling layers 2 x 2 with a stride of 2. It is a really deep network.This network has a total of about 138 million parameters, as seen in the following diagram
-<img src=" images/ch-10-9.png" >
+![png](images/ch-10-9.png)
 
 ### Classifying Cat/Dog images using VGG-16 in Keras
 
@@ -1214,7 +1214,7 @@ Inception networks are evolving constantly and have led to the birth of several 
 
 The inception network solves all of the previous issues by adding filters that have multiple sizes that operate on the same level. This causes the network to become wider rather than deeper. The next screenshot shows an inception module with dimension reduction. It performs convolution on the input with three different sizes of filters (1 x 1, 3 x 3, and 5 x 5) and an additional max pooling. The output is concatenated and sent to the next inception module. To make it cheaper, the number of input channels were limited by adding an extra 1 x 1 convolution before the 3 x 3 and 5 x 5 convolutions. Using the dimension reduced inception module, a neural network architecture was built. This was popularly known as GoogleNet (Inception v1). The architecture is shown in the following—GoogleNet has nine such inception modules stacked linearly. It is 22 layers deep (27, including the pooling layers) and uses global average pooling at the end of the last inception module
 
-<img src="images/ch-10-10.png" width =700 height =700 >
+![png](images/ch-10-10.png)
 Several versions of the inception net have been introduced to the time of writing (V2, 3, and 4) that are extensions over the previous architecture. Keras provides Inception-v3 models that can be trained from scratch or a pre-trained version (with the weights obtained by training on ImageNet) can be used.
 
 ### ResNet
@@ -1225,7 +1225,7 @@ ResNet stands for Residual Network and it introduces shortcuts in the network, w
 
 Here is an example of a 34-layer plain versus residual network
 
-<img src="images/ch-10-11.png" width =700 height =700  >
+![png](images/ch-10-11.png)
 
 Keras provides the ResNet50 model that can be trained from scratch or a pre-trained network can be loaded. 
 

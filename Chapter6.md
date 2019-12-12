@@ -430,7 +430,7 @@ plot_gray_image(axes4, median(noisy_image, disk(20)), 'Median $r=20$')
 
 ### Computing the local entropy
 Entropy is a measure of uncertainty or randomness in an image. It is mathematically defined as follows
-<img src="images/ch-6-1.png" >
+![png](images/ch-6-1.png)
 In the previous formula, pi is the probability (obtained from the normalized histogram of the image) associated with the gray-level, i. This formula computes the global entropy of an image. In a similar manner, we can define local entropy too, to define local image complexity, and it can be computed from the local histograms.
 
 
@@ -585,9 +585,9 @@ In this chapter, we discussed different image processing techniques based on mat
 ### Questions
 1. how with a binary image that morphological opening and closing are dual operations. (Hint: apply opening on an image foreground and closing on the image background with the same structuring element)
 2. Automatically crop an image using the convex hull of the object in it (the problem is taken from https://stackoverflow.com/questions/14211340/automatically-cropping-an-image-with-python-pil/51703287#51703287). Use the following image and crop the white background:
-<img src="images/ch-6-2.png" >
+![png](images/ch-6-2.png)
 The desired output image is shown as follows—the bounding rectangle to crop the image is to be found automatically
-<img src="images/ch-6-3.png" >
+![png](images/ch-6-3.png)
 3. Use the maximum() and minimum() functions from skimage.filters.rank to implement morphological opening and closing with a grayscale image.
 
 ### Further reading

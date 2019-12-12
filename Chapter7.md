@@ -32,7 +32,7 @@ Global features from the whole image (for example, image histogram) are often n
 3. They should be robust to the presence of noise/blur/occlusion, clutter, and illumination change (locality)
 4. The region should contain interesting structures (distinctiveness), and suchlike
 
-<img src="images/ch-7-1.png" >
+![png](images/ch-7-1.png)
 
 In this chapter, we are going to use python-opencv (the cv2 library) for the first time. In order to install it properly, it is recommended you go through this link: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html.
 
@@ -576,7 +576,7 @@ pylab.figure(figsize=(20,10)), pylab.imshow(img3), pylab.axis('off'), pylab.show
 
 ### Haar-like feature descriptor with scikit-image
 Haar-like features are very useful image features used in object detection. They were introduced in the first real-time face detector by Viola and Jones. Using integral images, Haar-like features of any size (scale) can be efficiently computed in constant time. The computation speed is the key advantage of a Haar-like feature over most other features. These features are just like the convolution kernels (rectangle filters) introduced in Chapter 3, Convolution and Frequency Domain Filtering. Each feature corresponds to a single value computed by subtracting a sum of pixels under a white rectangle from a sum of pixels under a black rectangle. The next diagram shows different types of Haar-like features, along with the important Haar-like features for face detection
-<img src="images/ch-7-2.png" >
+![png](images/ch-7-2.png)
 The first and the second important feature for face detection shown here seems to focus on the fact that the region of the eyes is often darker than the region of the nose and cheeks, and that the eyes are darker than the bridge of the nose, respectively. The next section visualizes the Haar-like features using scikit-image.
 
 
