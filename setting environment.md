@@ -63,13 +63,13 @@ This docker image running Ubuntu operating system (OS) include package library a
 
 ###### On windows
 
-1. Download [Docker Toolbox](https://docs.docker.com/docker-for-windows/install/)  from docker 
+1. Download [Docker desktop for windows](https://docs.docker.com/docker-for-windows/install/)  
 
 2. Run the installer
 
 3. If the application request for permissions, you have to accept all of them.
 
-4. In the terminal, type the following command to download the machine learning environment
+4. open command prompt, type the following command to download the docker images
 
    ```
    $ docker pull anto112/dip-docker
