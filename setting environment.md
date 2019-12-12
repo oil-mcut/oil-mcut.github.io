@@ -119,5 +119,5 @@ Once Docker has been installed and the package has been downloaded, one can simp
    $ docker run -it -p 8888:8888 -v /$(pwd)/home:/home anto112/dip-docker
    ```
 
-   You can change `/$(pwd)/notebooks` by any path on the local system. If the folder does not exist, it will be created. This option maps the given local folder with the folder of the notebooks on Jupyter. This folder should contain all your notebooks indeed.
+   You can change `/$(pwd)/home` by any path on the local system. If the folder does not exist, it will be created. This option maps the given local folder with the folder of the notebooks on Jupyter. This folder should contain all your notebooks indeed.
 
