@@ -1,12 +1,9 @@
 ---
 layout: page
-title: Chapter 3
+title: Chapter 3: Convolution and Frequency domain Filtering
 permalink: /chapter-3/
 ---
 
-# Hands-on Image Processing with Python
-
-## Chapter 3: Convolution and Frequency domain Filtering
 **Author: Sandipan Dey**
 
 ### Convolution and Frequency Domain Filtering
@@ -28,13 +25,13 @@ Filtering in the frequency domain (with the SciPy ndimage module and scikit-imag
 <p>In this section, we will see more applications of convolution on images using Python modules such as scipy signal and ndimage. Let's start with convolution theorem and see how the convolution operation becomes easier in the frequency domain.</p>
 **Application of the convolution theorem**
 <p>The convolution theorem says that convolution in an image domain is equivalent to a simple multiplication in the frequency domain:</p>
-<img src="./images/ch-3-1.png" >
+<img src="images/ch-3-1.png" width="500" height="200"/>
 
 <p>Following diagram shows the application of fourier transforms:</p>
-<img src="./images/ch-3-2.png" >
+<img src="images/ch-3-2.png" />
 
 <p>The next diagram shows the basic steps in frequency domain filtering. We have the original image, F, and a kernel (a mask or a degradation/enhancement function) as input. First, both input items need to be converted into the frequency domain with DFT, and then the convolution needs to be applied, which by convolution theorem is just an (element-wise) multiplication. This outputs the convolved image in the frequency domain, on which we need to apply IDFT to obtain the reconstructed image (with some degradation or enhancement on the original image):</p>
-<img src="./images/ch-3-3.png" >
+<img src="images/ch-3-3.png" />
 
 **Import libraries**
 
@@ -133,8 +130,6 @@ pylab.show()
 im = rgb2gray(imread('../images/lena.jpg'))
 im.shape
 ```
-
-
 
 
     (220, 220)
@@ -314,8 +309,6 @@ pylab.subplot(133), pylab.imshow(im_blurred2), pylab.title('ffconvolve Output', 
 
 
 
-
-
     (<matplotlib.axes._subplots.AxesSubplot at 0x7f0acfd7ec88>,
      <matplotlib.image.AxesImage at 0x7f0acd17e6d8>,
      <matplotlib.text.Text at 0x7f0acd1814a8>,
@@ -403,8 +396,6 @@ pylab.show()
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:7: ComplexWarning: Casting complex values to real discards the imaginary part
       import sys
 
-
-
 ![png](img/Chapter3/output_34_1.png)
 
 
@@ -446,9 +437,6 @@ pylab.show()
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
 
 
-​    
-
-
 ![png](img/Chapter3/output_38_2.png)
 
 
@@ -480,9 +468,6 @@ pylab.show()
 
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:14: DeprecationWarning: `signaltonoise` is deprecated!
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
-
-
-​    
 
 
 ![png](img/Chapter3/output_41_1.png)
@@ -555,8 +540,6 @@ pylab.show()
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:3: ComplexWarning: Casting complex values to real discards the imaginary part
       This is separate from the ipykernel package so we can avoid doing imports until
 
-
-
 ![png](img/Chapter3/output_48_1.png)
 
 
@@ -601,8 +584,6 @@ pylab.show()
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
       del sys.path[0]
 
-
-
 ![png](img/Chapter3/output_50_2.png)
 
 
@@ -615,10 +596,7 @@ pylab.imshow( (20*np.log10( 0.1 + freq2)).astype(int))
 pylab.show()
 ```
 
-    /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:2: ComplexWarning: Casting complex values to real discards the imaginary part
-
-
-​    
+    /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:2: ComplexWarning: Casting complex values to real discards the imaginary part   
 
 
 ![png](img/Chapter3/output_52_1.png)
@@ -655,8 +633,6 @@ pylab.show()
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:15: DeprecationWarning: `signaltonoise` is deprecated!
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
       from ipykernel import kernelapp as app
-
-
 
 ![png](img/Chapter3/output_54_1.png)
 
@@ -715,8 +691,6 @@ pylab.show()
 
 
     0.7862192363545747
-
-
 
 ![png](img/Chapter3/output_59_2.png)
 
@@ -794,7 +768,7 @@ The screenshot shows the output of the preceding code block, the restored image 
 ### Image restoration
 
 <p>In image restoration, the degradation is modeled. This enables the effects of the degradation to be (largely) removed. The challenge is the loss of information and noise. The following diagram shows the basic image degradation model: </p>
-<img src="./images/ch-3-4.png" >
+<img src="images/ch-3-4.png" />
 
 <p>In the next few sections, we will describe a couple of degradation models (namely _***inverse***_ and Wiener filters).</p>
 ### Deconvolution and inverse filtering with FFT
@@ -849,8 +823,6 @@ pylab.show()
 
     243.7587 255.0
 
-
-
 ![png](img/Chapter3/output_70_1.png)
 
 
@@ -870,16 +842,12 @@ pylab.imshow(mblur_kernel)
 ```
 
 
-
-
     <matplotlib.image.AxesImage at 0x7f0acce4b198>
 
 
 
 
 ![png](img/Chapter3/output_74_1.png)
-
-
 
 ```python
 ### this is code, refer textbook
@@ -999,14 +967,10 @@ pylab.imshow(im, pylab.cm.gray), pylab.axis('off'), pylab.title('Original image'
 
 
 
-
-
     (<matplotlib.image.AxesImage at 0x7f0acd075cc0>,
      (-0.5, 629.5, 473.5, -0.5),
      <matplotlib.text.Text at 0x7f0acd0b8eb8>,
      None)
-
-
 
 The screenshot shows the output of the preceding code block, the original noisy image
 
@@ -1025,16 +989,10 @@ pylab.title('Spectrum with Fourier transform', size=20)
 ```
 
 
-
-
     <matplotlib.text.Text at 0x7f0accb977b8>
 
 
-
-
     <matplotlib.figure.Figure at 0x7f0accf6c710>
-
-
 
 ![png](img/Chapter3/output_84_2.png)
 
@@ -1060,13 +1018,9 @@ pylab.figure(), plot_spectrum(fftpack.fftshift(im_fft2)),pylab.title('Filtered S
 ```
 
 
-
-
     (<matplotlib.figure.Figure at 0x7f0accc62908>,
      None,
      <matplotlib.text.Text at 0x7f0acc7cd208>)
-
-
 
 
     <matplotlib.figure.Figure at 0x7f0accc62908>
@@ -1090,8 +1044,6 @@ pylab.figure(figsize=(10,10)), pylab.imshow(im_new, pylab.cm.gray),
 pylab.axis('off')
 pylab.title('Reconstructed Image', size=20)
 ```
-
-
 
 
     <matplotlib.text.Text at 0x7f0accd52438>

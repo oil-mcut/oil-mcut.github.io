@@ -1,13 +1,11 @@
 ---
 layout: page
-title: Chapter 2
+title: Chapter 2: Sampling & Fourier Transform 
 permalink: /chapter-2/
 ---
 
-# Hands-on Image Processing with Python
+**Author: Sandipan Dey**
 
-## Chapter 2: Sampling & Fourier Transform 
-<p>Author: Sandipan Dey</p>
 In this chapter, we'll discuss 2D signals in the time and frequency domains. We'll first talk about spatial sampling, an important concept that is used in resizing an image, and about the challenges in sampling. We'll try solving these problems using the functions in the Python library. We'll also introduce intensity quantization in an image; intensity quantizing means how many bits will be used to store a pixel in an image and what impact it will have on the quality of the image. You will surely want to know about the Discrete Fourier Transform (DFT) that can be used to transform an image from the spatial (time) domain into the frequency domain. You'll learn to implement DFT with the Fast Fourier Transform (FFT) algorithm using numpy and scipy functions and will be able to apply this implementation on an image!
 
 You will also be interested in knowing about __**2D convolutions**__ that increase the speed of convolution. We'll also understand the basic concepts of the convolution theorem. We'll try and clear up the age-old confusion between correlation and convolution using an example. Moreover, we'll describe an example from SciPy that will show you how to find the location of specific patterns in an image using a template by applying cross-correlation.
@@ -21,7 +19,7 @@ The topics that we'll be covering in this chapter are as follows:
 
 **Image formation – sampling and quantization**
 <p>In this section, we'll describe two important concepts for image formation, namely, sampling and quantization, and see how we can resize an image with sampling and colors quantized with PIL and scikit-image libraries. We'll use a hands-on approach here and we'll define the concepts while seeing them in action. Ready?</p>
-</p>Let's start by importing all of the required packages</p>
+<p>Let's start by importing all of the required packages</p>
 
 ### Import libraries
 
@@ -99,7 +97,7 @@ As we can see, the output image, created with the nearest-neighbor method, is 25
 
 <p>Notice how the quality improves when bi-linear interpolation is used with up-sampling.</p>
 <p>Let's consider a grayscale image, which is basically a 2D matrix of pixel values at integer grid locations. To interpolate the pixel value at any point P on the grid, the 2D analogue of linear interpolation: bilinear interpolation can be used. In this case, for each possible point P (that we would like to interpolate), four neighbors (namely, Q11, Q12, Q22, and Q21) are going to be there and the intensity values of these four neighbors are to be combined to compute the interpolated intensity at the point P, as shown in the following figure</p>
-<img src="./images/bi-linier.png" >
+<img src="images/bi-linier.png" >
 
 
 ```python
@@ -184,10 +182,8 @@ As you can see, it contains some black patches/artifacts and patterns that were 
 ### Down-sampling and anti-aliasing
 
 <p>As we have seen, down-sampling is not very good for shrinking images as it creates an aliasing effect. For instance, if we try to resize (down-sample) the original image by reducing the width and height a factor of 5, we shall get such patchy and bad output.</p>
-
 **Anti-aliasing**
 <p>The problem here is that a single pixel in the output image corresponds to 25 pixels in the input image, but we are sampling the value of a single pixel instead. We should be averaging over a small area in the input image. This can be done using ANTIALIAS (a high-quality down-sampling filter); this is how you can do it:</p>
-
 ```python
 im = Image.open("../images/tajmahal.jpg")
 #im = im.resize((im.width//5, im.height//5))
@@ -306,7 +302,7 @@ As can be seen, although the color-quantization reduces image size (since the n
 <P>The Fourier transform method has a long mathematical history and we are not going to discuss it here (it can be found in any digital signal processing or digital image processing theory book). As far as image processing is concerned, we shall focus only on 2D Discrete Fourier Transform (DFT). The basic idea behind the Fourier transform method is that an image can be thought of as a 2D function, f, that can be expressed as a weighted sum of sines and cosines (Fourier basic functions) along two dimensions.</P>
 <P>We can transition from a set of grayscale pixel values in the image (spatial/time domain) to a set of Fourier coefficients (frequency domain) using the DFT, and it is discrete since the spatial and the transform variables to be used can only take a set of discrete consecutive integer values (typically the locations of a 2D array representing the image).</P>
 <P>In a similar way, the frequency domain 2D array of Fourier coefficients can be converted back into the spatial domain using the Inverse Discrete Fourier Transform (IDFT), which is also known as reconstruction of the image using the Fourier coefficients. The DFT and IDFT are mathematically defined as follows:</P>
-<img src="./images/eq-3.png" >
+<img src="images/eq-3.png" >
 
 
 **Why do we need the DFT?**
@@ -317,10 +313,8 @@ As can be seen, although the color-quantization reduces image size (since the n
 **The Fast Fourier Transform algorithm to compute the DFT**
 
 <p> The Fast Fourier Transform (FFT) is a divide and conquer algorithm to recursively compute the DFT much quicker (with O (N.log2N) time complexity) than the much slower O (N2) naive computation for an n x n image. In Python, both the numpy and scipy libraries provide functions to compute 2D DFT/IDFT using the FFT algorithm. Let's see a few examples.</p>
-
 **FFT with the scipy.fftpack module**
 <p>We'll use the scipy.fftpack module's fft2()/ifft2() function to compute the DFT/IDFT with the FFT algorithm using a grayscale image, rhino.jpg:</p>
-
 ```python
 im = np.array(Image.open('../images/rhino.jpg').convert('L')) # we shall work with grayscale image
 snr = signaltonoise(im, axis=None)
@@ -344,17 +338,11 @@ pylab.show()
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: `signaltonoise` is deprecated!
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
 
-
-​    
-
     SNR for the original image = 2.023722773801701
 
 
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:8: DeprecationWarning: `signaltonoise` is deprecated!
-    scipy.stats.signaltonoise is deprecated in scipy 0.16.0
-
-
-​    
+    scipy.stats.signaltonoise is deprecated in scipy 0.16.0   
 
     SNR for the image obtained after reconstruction = 2.023722773801701
 
@@ -369,7 +357,6 @@ As can be seen from the SNR values from the inline output and from the visual di
 
 <p>As Fourier coefficients are complex numbers, we can view magnitudes directly. Displaying magnitudes of Fourier transforms is called the spectrum of the transform. The value F [0,0] of the DFT is called the DC coefficient.</p>
 <p>The DC coefficient is too large for the other coefficient values to be seen, which is why we need to stretch the transform values by displaying the logarithm of the transform. Also, for display convenience, the transform coefficients are shifted (with fftshift()) so that the DC component is in the center. Excited to create a Fourier spectrum of the rhino image? Code this:</p>
-
 ```python
 # the quadrants are needed to be shifted around in order that the low spatial frequencies are in the center of the 2D fourier-transformed image.
 freq2 = fp.fftshift(freq)
@@ -395,7 +382,6 @@ The DFT of an image can be computed with the numpy.fft module's similar set of
 **Computing the magnitude and phase of a DFT**
 
 <p> We'll use the house.png image as input and thus fft2() to get the real and imaginary components of the Fourier coefficients; after that, we'll compute the magnitude/spectrum and the phase and, finally, use ifft2() to reconstruct the image:</p>
-
 ```python
 import numpy.fft as fp
 im1 = rgb2gray(imread('../images/house.png'))
@@ -419,7 +405,6 @@ pylab.show()
 
 <p>As can be seen, the magnitude  | F(u,v) | generally decreases with higher spatial frequencies and the FFT phase appears to be less informative.</p>
 <p> Let's now compute the spectrum/magnitude, phase, and reconstructed image with another input image, house2.png:</p>
-
 ```python
 im2 = rgb2gray(imread('../images/house2.png'))
 pylab.figure(figsize=(12,10))
@@ -468,6 +453,7 @@ pylab.show()
 
 <p> As you can see, the kernel window, marked by an arrow in the input image, traverses through the image and obtains values that are mapped on the output image after convolving.</p>
 **Why convolve an image?**
+
 <p> Convolution applies a general-purpose filter effect on the input image. This is done in order to achieve various effects with appropriate kernels on an image, such as smoothing, sharpening, and embossing, and in operations such as edge detection.</p>
 **Convolution with SciPy signal's convolve2d**
 <p>e SciPy signal module's convolve2d() function can be used for correlation. We are going to apply convolution on an image with a kernel using this function.</p>
@@ -637,3 +623,4 @@ fig.show()
 - Lecture notes from http://fy.chalmers.se/~romeo/RRY025/notes/E1.pdf and http://web.pdx.edu/~jduh/courses/Archive/geog481w07/Students/Ludwig_ImageConvolution.pdf
 - These slides (https://web.cs.wpi.edu/~emmanuel/courses/cs545/S14/slides/lecture10.pdf) by Prof. Emmanuel Agu
 - This lecture from Oxford university: http://www.robots.ox.ac.uk/~az/lectures/ia/lect2.pdf
+

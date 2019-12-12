@@ -1,22 +1,16 @@
 ---
 layout: page
-title: Chapter 1
+title: Chapter 1 Getting started with Image Processing
 permalink: /chapter-1/
 ---
 
-
-
-# Hands-on Image Processing with Python
-
-## Chapter 1: Getting started with Image Processing
 **Author: Sandipan Dey**
 
 We recommend creating a folder (sub-directory) to store images to be used for processing (for example, for the Python code samples, we have used the images stored inside a folder named images) and then provide the path to the folder to access the image to avoid the file not found exception.
 
 ### Import libraries
 
-Use 'import module' or 'from module import'?
-https://stackoverflow.com/questions/710551/use-import-module-or-from-module-import
+Use 'import module' or 'from module import'? [open isue](https://stackoverflow.com/questions/710551/use-import-module-or-from-module-import)
 
 
 ```python
@@ -382,13 +376,7 @@ x
     Test the array is read-only or not:
     Try to change the value of the first element:
 
-
-
-
-
     array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
-
-
 
 ### Image manipulations with numpy array slicing
 
@@ -524,8 +512,6 @@ im.show()
 ```
 
     720 540
-
-
 
 ```python
 im_small = im.resize((im.width//5, im.height//5), pil.Image.ANTIALIAS)
@@ -877,7 +863,7 @@ plt.show()
 
 The blend() function can be used to create a new image by interpolating two given images (of the same size) using a constant, α. Both images must have the same size and mode. The output image is given by the following
 
-<img src="./images/eq-2.png" >
+<img src="images/eq-2.png" >
 
 <p>If α is 0.0, a copy of the first image is returned. If α is 1.0, a copy of the second image is returned. The next code snippet shows an example</p>
 ```python
