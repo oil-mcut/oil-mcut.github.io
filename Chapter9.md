@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 9: Classical Machine Learning Methods in Image Processing 
+title: Chapter 9 Classical Machine Learning Methods in Image Processing 
 permalink: /chapter-9/
 ---
 
@@ -496,7 +496,7 @@ t_accuracy
 ```
 
     The generative model makes 438 errors out of 10000
-
+    
     0.95620000000000005
 
 

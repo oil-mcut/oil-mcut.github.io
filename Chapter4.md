@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 4: Image Enhancement
+title: Chapter 4 Image Enhancement
 permalink: /chapter-4/
 ---
 
@@ -34,7 +34,6 @@ We already discussed a few of them in the Chapter 1, Getting Started with Image
 
 **Import libraries**
 <p>As usual, we will start by importing all the required modules from the relevant Python libraries</p>
-
 ```python
 %matplotlib inline
 import numpy as np

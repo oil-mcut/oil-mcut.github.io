@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 8: Image Segmentation
+title: Chapter 8 Image Segmentation
 permalink: /chapter-8/
 ---
 

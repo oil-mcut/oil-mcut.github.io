@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 3: Convolution and Frequency domain Filtering
+title: Chapter 3 Convolution and Frequency domain Filtering
 permalink: /chapter-3/
 ---
 

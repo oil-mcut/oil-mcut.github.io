@@ -375,7 +375,7 @@ x
 
     Test the array is read-only or not:
     Try to change the value of the first element:
-
+    
     array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
 
 ### Image manipulations with numpy array slicing

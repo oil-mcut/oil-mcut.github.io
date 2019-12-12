@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 10: Deep Learning Models in Image Processing
+title: Chapter 10 Deep Learning Models in Image Processing
 permalink: /chapter-10/
 ---
 
@@ -1184,7 +1184,7 @@ len(test_data) # only took a subset of the test data
 ```
 
     100%|█████████████████████████████████████████████████████████████████████| 1000/1000 [00:24<00:00, 41.20it/s]
-
+    
     1000
 
 

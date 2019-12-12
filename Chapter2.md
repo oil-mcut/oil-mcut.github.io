@@ -1,8 +1,10 @@
 ---
 layout: page
-title: Chapter 2: Sampling & Fourier Transform 
+title: Chapter 2 Sampling & Fourier Transform 
 permalink: /chapter-2/
 ---
+
+
 
 **Author: Sandipan Dey**
 
@@ -20,7 +22,6 @@ The topics that we'll be covering in this chapter are as follows:
 **Image formation – sampling and quantization**
 <p>In this section, we'll describe two important concepts for image formation, namely, sampling and quantization, and see how we can resize an image with sampling and colors quantized with PIL and scikit-image libraries. We'll use a hands-on approach here and we'll define the concepts while seeing them in action. Ready?</p>
 <p>Let's start by importing all of the required packages</p>
-
 ### Import libraries
 
 
@@ -337,13 +338,13 @@ pylab.show()
 
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: `signaltonoise` is deprecated!
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0
-
+    
     SNR for the original image = 2.023722773801701
 
 
     /usr/local/lib/python3.5/dist-packages/ipykernel_launcher.py:8: DeprecationWarning: `signaltonoise` is deprecated!
     scipy.stats.signaltonoise is deprecated in scipy 0.16.0   
-
+    
     SNR for the image obtained after reconstruction = 2.023722773801701
 
 

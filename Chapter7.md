@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 7: Extracting Image Features and Descriptors
+title: Chapter 7 Extracting Image Features and Descriptors
 permalink: /chapter-7/
 ---
 

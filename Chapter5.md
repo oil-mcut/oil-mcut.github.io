@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 5: Image Enhancements using Derivatives 
+title: Chapter 5 Image Enhancements using Derivatives 
 permalink: /chapter-5/
 ---
 

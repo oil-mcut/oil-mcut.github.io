@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chapter 6: Mophological Image Processing
+title: Chapter 6 Morphological Image Processing
 permalink: /chapter-6/
 ---
 
