@@ -68,7 +68,8 @@ The following are the steps that you must follow to be able to use the pre-train
 1. Clone this repository: go to https://github.com/allanzelener/YAD2K/, right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
 2. Download the weights and cfg file from https://pjreddie.com/darknet/yolo/ by clicking on the yellow links on the page, marked by red boxes here:
-    
+   
+
 ![png](images/ch-11-3.png)
     
 3. Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
