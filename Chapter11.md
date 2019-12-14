@@ -69,9 +69,13 @@ The following are the steps that you must follow to be able to use the pre-train
 
 2. Download the weights and cfg file from https://pjreddie.com/darknet/yolo/ by clicking on the yellow links on the page, marked by red boxes here:
    
+   
 
 ![png](images/ch-11-3.png)
     
+
+
+
 3. Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
 
 4. Go inside the YAD2K-master folder, open a command prompt (you need to have Python3 installed and in path) and run the following command:
@@ -89,6 +93,8 @@ The following are the steps that you must follow to be able to use the pre-train
 10. Double-check that the folder structure is exactly as shown in the following screenshot, with the required files present, before running the code:
 
 ![png](images/ch-11-4.png)
+
+
 
 Let's first load all the required libraries, as shown in this code block:
 
