@@ -6,13 +6,13 @@ permalink: /setting-environment/
 
 We Provide two ways. locally on your own operating system (OS) or using container docker
 
-## Setup in locally OS
+# Setup in locally OS
 
-##### Use Anaconda
+## Use Anaconda
 
 we recommend using the free tool from [anaconda python distribution](https://www.anaconda.com/download/). **Anaconda distribution** comes with more than 1,500 packages as well as the **conda** package and virtual environment manager. It also includes a GUI, **Anaconda Navigator**, as a graphical alternative to the command line interface (CLI). Please Be sure to download the Python 3 version, which currently installs Python 3.6. We are not supporting Python 2.
 
-##### Anaconda Virtual environment
+## Anaconda Virtual environment
 
 Once you have Anaconda installed, it makes sense to create a virtual environment for the course. If you choose not to use a virtual environment, it is up to you to make sure that all dependencies for the code are installed globally on your machine. To set up a virtual environment, run in a terminal (for ubuntu) or open anaconda prompt if you using Windows OS
 
@@ -34,7 +34,7 @@ You may refer to [this page](https://conda.io/docs/user-guide/tasks/manage-envir
 
 
 
-## Setup container docker 
+# Setup container docker 
 
 This project helps one to easily benefit from a fully packaged for running teaching material. This has been especially made for teaching purposes but it can simply be used to begin in Machine Learning.
 
@@ -59,9 +59,9 @@ This docker image running Ubuntu operating system (OS) include package library a
 - tensorflow==1.14.0
 - tornado==4.5.3
 
-#### How to install
+## How to install
 
-###### On windows
+### On windows
 
 1. Download [Docker desktop for windows](https://docs.docker.com/docker-for-windows/install/)  
 
@@ -75,7 +75,7 @@ This docker image running Ubuntu operating system (OS) include package library a
    $ docker pull anto112/dip-docker
    ```
 
-###### On Linux
+### On Linux
 
 1. Open a terminal
 
