@@ -305,6 +305,8 @@ As can be seen, although the color-quantization reduces image size (since the n
 <P>In a similar way, the frequency domain 2D array of Fourier coefficients can be converted back into the spatial domain using the Inverse Discrete Fourier Transform (IDFT), which is also known as reconstruction of the image using the Fourier coefficients. The DFT and IDFT are mathematically defined as follows:</P>
 ![png](images/eq-3.png)
 
+
+
 **Why do we need the DFT?**
 
 <p> First of all, transformation to the frequency domain leads to <span class="burk">a better understanding of an image</span>. As we'll see in the next few sections, the low frequencies in the frequency domain correspond to the average gross level of information in an image, whereas the higher frequencies correspond to edges, noise, and more detailed information.</p>
@@ -448,6 +450,8 @@ pylab.show()
 <p> Convolution is an operation that operates on two images, one being an input image and the other one being a mask (also called the kernel) as a filter on the input image, producing an output image. </p>
 <p>  Convolution filtering is used to modify the spatial frequency characteristics of an image. It works by determining the value of a central pixel by adding the weighted values of all of its neighbors together to compute the new value of the pixel in the output image. The pixel values in the output image are computed by traversing the kernel window through the input image, as shown in the next screenshot (for convolution with the valid mode; we'll see convolution modes later in this chapter):</p>
 ![png](images/ch-2-1.png)
+
+
 
 **see graphics on textbook**
 

@@ -430,7 +430,9 @@ plot_gray_image(axes4, median(noisy_image, disk(20)), 'Median $r=20$')
 
 ### Computing the local entropy
 Entropy is a measure of uncertainty or randomness in an image. It is mathematically defined as follows
+
 ![png](images/ch-6-1.png)
+
 In the previous formula, pi is the probability (obtained from the normalized histogram of the image) associated with the gray-level, i. This formula computes the global entropy of an image. In a similar manner, we can define local entropy too, to define local image complexity, and it can be computed from the local histograms.
 
 

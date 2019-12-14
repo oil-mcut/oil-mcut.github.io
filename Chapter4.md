@@ -20,6 +20,8 @@ The topics to be covered in this chapter are as follows:
 <p>As discussed in the Chapter 1, Getting Started with Image Processing, the point-wise intensity transformation operation applies a transfer function, T, to each pixel, f(x,y), of the input image to generate a corresponding pixel in the output image. The transformation can be expressed as g(x,y) = T(f(x,y)) or, equivalently, s = T(r), where r is the gray-level of a pixel in the input image and s is the transformed gray-level of the same pixel in the output image. It's a memory-less operation, and the output intensity at the location,(x, y), depends only on the input intensity at the same point. Pixels of the same intensity get the same transformation. This does not bring in new information and may cause loss of information, but can improve the visual appearance or make features easier to detect—that is why these transformations are often applied at the pre-processing step in the image processing pipeline. The following screenshot shows the point processing, as well as the mask/kernel processing (for spatial filters that consider neighborhood pixels also for transformation, as we have already seen):</p>
 ![png](images/ch-4-1.png)
 
+
+
 <p>Some popular intensity transformations are the following:</p>
    1. Image negatives
    2. Color space transformation
@@ -138,6 +140,8 @@ The contrast stretching operation takes a low-contrast image as input and stretc
 
 ![png](images/ch-4-2.png)
 
+
+
 As can be seen from the previous screenshot, the upper and lower pixel value limits (over which the image is to be normalized), need to be specified before the stretching can be performed (for example, for a gray-level image, the limits are often set to 0 and 255, in order for the output image to span the entire range of available pixel values). All we need to find is a suitable value of m from the CDF of the original image. The contrast stretching transform produces higher contrast than the original by darkening the levels below the value m (in other words, stretching the values toward the lower limit) in the original image and brightening the levels previous to value m (stretching the values toward the upper limit) in the original image. The following sections describe how to implement contrast-stretching using the PIL library.
 
 **Using PIL as a point operation**
@@ -168,6 +172,8 @@ The picture above shows the output of the previous code block. As can be seen, t
 The contrast stretching operation stretches the over-concentrated gray-levels. The transfer function can be thought of as a piece-wise linear function, where the slope in the stretching region is greater than one. This can be seen from the following screenshot
 
 ![png](images/ch-4-3.png)
+
+
 
 The following code block shows how the PIL point()function can be used to implement contrast stretching. The transfer function is defined by the contrast() function as a piece wise linear function
 
@@ -221,9 +227,13 @@ This is a point operation that creates binary images from gray-level ones by tur
 
 ![png](images/ch-4-4.png)
 
+
+
 If g(x, y) is a thresholded version of f(x, y) at some global threshold T, then the following can be applied
 
 ![png](images/eq-4-1.png)
+
+
 
 Why do we need a binary image? A few reasons are, for example, that we may be interested in separating an image into foreground and background; that the image is to be printed with a black and white printer (and all the shades of gray need to be represented using black and white dots only); or that we want to pre-process the image with morphological operations, as we shall discuss later in this chapter.
 
@@ -408,6 +418,8 @@ pylab.show()
 ![png](img/Chapter4/output_35_1.png)
 
 
+
+
 The screenshot shows the output of the previous code. As can be seen, adaptive histogram equalization provides better results than histogram equalization in terms of making the details of the output image clearer.
 
 ### Histogram Matching
@@ -419,6 +431,8 @@ Histogram matching is a process where an image is altered in such a way that its
 4. The input data value xi is replaced by xj:
 
 ![png](images/ch-4-7.png)
+
+
 
 The following code block shows how histogram matching can be implemented using Pytho
 
@@ -482,6 +496,8 @@ pylab.show()
 ![png](img/Chapter4/output_38_1.png)
 
 
+
+
 The following picture above shows the output of the previous code. As can be seen, the output bean image's CDF coincides with the input Lena image's CDF after histogram matching, and this enhances the contrast of the low-contrast input bean image
 
 ### Histogram matching for an RGB image
@@ -539,6 +555,8 @@ plt.show()
 
 
 ![png](img/Chapter4/output_41_1.png)
+
+
 
 
 ### Linear noise smoothing
@@ -601,8 +619,9 @@ size=30)
 pylab.show()
 ```
 
-
 ![png](img/Chapter4/output_49_0.png)
+
+
 
 
 #### Smoothing with the Gaussian blur filter
@@ -623,8 +642,9 @@ pylab.suptitle('PIL Gaussian Blur with different Radius', size=20)
 pylab.show()
 ```
 
-
 ![png](img/Chapter4/output_51_0.png)
+
+
 
 
 The screenshot shows the output. As can be seen, with a higher radius with the Gaussian filter, the image becomes smoother with the removal of more and more noise, while at the same time blurring the image more:
@@ -650,8 +670,9 @@ pylab.subplot(133), plot_image(im_gaussian, 'with the gaussian filter')
 pylab.show()
 ```
 
-
 ![png](img/Chapter4/output_54_0.png)
+
+
 
 
 The screenshot shows the output of the previous code. As can be seen, the box filter of the same kernel size blurs the output image more than the Gaussian filter of same size with σ=2.
@@ -690,8 +711,9 @@ for prop_noise in np.linspace(0.05,0.3,3):
 pylab.show()
 ```
 
-
 ![png](img/Chapter4/output_59_0.png)
+
+
 
 
 The screenshot shows the output of the previous code, the output images after applying the median filter on the noisy images with different levels of added noise with a different kernel size. As can be seen, the results show that the non-linear median filter works much better for impulse (salt-and-pepper) noise than the linear mean and weighted mean (Gaussian) filters, although with some patchy effects and the loss of some details.
@@ -714,8 +736,9 @@ pylab.subplot(1,3,3), plot_image(im1, 'Output (Min Filter size=' + str(sz)+ ')')
 pylab.show()
 ```
 
-
 ![png](img/Chapter4/output_62_0.png)
+
+
 
 
 ### Smoothing (denoising) with scikit-image

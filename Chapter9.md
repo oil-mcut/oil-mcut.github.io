@@ -351,7 +351,10 @@ In this section, we will build a classifier that takes an image of a handwritten
 
 ###### Squared Euclidean distance                                                        
 To compute the nearest neighbors in our dataset, we need to first be able to compute distances between data points. A natural distance function is Euclidean distance; for two vectors x, y ∈ Rd, their Euclidean distance is defined as follows
+
 ![png](images/ch-9-3.png)
+
+
 
 Often, we omit the square root and simply compute the squared Euclidean distance. For the purposes of nearest neighbor computations, the two are equivalent: for three vectors x, y, z ∈ Rd, we have ∥x−y∥  ≤  ∥x−z∥ if and only if ∥x−y∥2 ≤ ∥x−z∥2. Now we just need to be able to compute the squared Euclidean distance. 
 
@@ -424,10 +427,13 @@ The following code block defines a function, fit_generative_model(), that takes
 - μj: The 784-dimensional mean vector
 - ∑j: The 784 x 784 covariance matrix 
 
-
 This means that π is a 10 x 1, μ is a 10 x 784, and ∑ is a 10 x 784 x 784 matrix. The Maximum Likelihood Estimates (MLE) for the parameters are the empirical estimates, as shown in the following diagram
 
+
+
 ![png](images/ch-9-6.png)
+
+
 
 The empirical covariances are very likely to be singular (or close to singular), which means that we won't be able to do calculations with them. Hence, it is important to regularize these matrices. The standard way of doing this is to add c*I to them, where c is some constant and I is the 784-dimensional identity matrix (to put it another way, we compute the empirical covariances and then increase their diagonal entries by some constant c). This modification is guaranteed to yield covariance matrices that are non-singular, for any c > 0, no matter how small. Now, c becomes a (regularization) parameter and, by setting it appropriately, we can improve the performance of the model. We should choose a good value of c. Crucially, this needs to be done using the training set alone, by setting aside part of the training set as a validation set or using some kind of cross-validation—we leave this as an exercise for the reader to complete. In particular, the display_char() function will be used to visualize the means of the Gaussians for the first three digits:
 
@@ -475,7 +481,11 @@ display_char(mu[2])
 
 ###### Computing the posterior probabilities to make predictions on test data and model evaluation
 In order to predict the label of a new image, x, we need to find the label, j, for which the posterior probability, Pr(y=j|x), is maximum. It can be computed using the Bayes rule, as follows
+
 ![png](images/ch-9-7.png)
+
+
+
 The following code block shows how to predict the labels of the test dataset using the generative model and how to compute the number of errors the model makes on the test dataset. As can be seen, the accuracy of the test dataset is 95.6%, which is a little less than the 1-NN classifier
 
 
@@ -573,12 +583,18 @@ display_char(wrong_digits[1])
 As we have discussed briefly in Chapter 7, Extracting Image Features and Descriptors, (in the context of Haar-like feature extraction), the Viola-Jones' object detection technique can be used for face detection in images. It is a classical machine learning approach, where a cascade function is trained using a training set of positive and negative images, by using the hand-crafted Haar-like features extracted from the images.
 
 The Viola-Jones algorithm typically uses a base patch size (for example, 24 x 24 pixels) that it slides across and down an image and computes a huge number of Haar-like features (160,000 possible features for a 24 x 24 patch, although they have achieved 95% accuracy with an appropriately chosen 6,000 feature subset); these can be extracted, but to run even 6,000 features on every patch is a lot of effort. So, once the features have been decided on and assembled, a number of fast rejectors are built. This is based on the idea that, in a complete image, most of the possible positions we check will not contain a face—therefore, it is faster overall to reject quickly than to invest too much in it. If the location doesn't contain a face, we discard it and move on before investing more computational checks. This is another of the tricks used by Viola-Jones to achieve its performance, as shown in the following diagram:
+
 ![png](images/ch-9-8.png)
+
+
 
 Instead of applying all 6,000 features on a window, the features are grouped into different stages of weak classifiers through the use of the AdaBoost ensemble classifier (to perform adaptive boosting of the performance of the cascade of feature), and these weak classifiers are run one by one in a cascade. If the patch window under consideration fails at any stage, the window is rejected. A patch that passes all stages is considered a valid detection. 
 
 A nice benefit of Haar-like features being so quick to calculate (due to the integral image technique) leads to the final aspect of the Viola-Jones performance. The base patch itself can be scaled and the features in the final cascade evaluated very quickly to search for objects of different sizes without the requirement for an image pyramid. Putting it all together, the Viola-Jones workflow for training looks like the one shown in the following diagram
+
 ![png](images/ch-9-9.png)
+
+
 
 This algorithm is blazingly fast, but has obvious accuracy limitations. 
 
@@ -746,7 +762,11 @@ The SVM trainer selects the best hyperplane to separate positive and negative ex
 
 ###### Classification with the SVM model
 This HOG computation is traditionally performed by repeatedly stepping a window of, say, 64 pixels wide by 128 pixels high across a test image frame and computing the HOG descriptors. As the HOG calculation contains no intrinsic sense of scale and objects can occur at multiple scales within an image, the HOG calculation is stepped and repeated across each level of a scale pyramid. The scaling factor between each level in the scale pyramid is commonly between 1.05 and 1.2 and the image is repeatedly scaled down until the scaled source frame can no longer accommodate a complete HOG window. If the SVM classifier predicts the detection of an object at any scale, the corresponding bounding box is returned. The following diagram shows a typical HOG object (pedestrian) detection workflow
+
 ![png](images/ch-9-10.png)
+
+
+
 This technique is more accurate but more computationally complex than Viola-Jones object detection.
 
 ###### Computing BoundingBoxes with HOG-SVM

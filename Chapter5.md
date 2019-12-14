@@ -47,7 +47,11 @@ import matplotlib.image as mpimg
 
 The following diagram shows how to compute the <span class="mark">partial derivatives</span> of an image I (which is a function f(x, y)), using <span class="mark">finite differences</span> (with <span class="mark">forward</span> and <span class="mark">central</span> differences, the latter one being more accurate), which can be implemented using convolution with the kernels shown. The diagram also defines the gradient vector, its magnitude (which corresponds to the strength of an edge), and direction (perpendicular to an edge). Locations where the intensity (gray level value) changes sharply in an input image correspond to the locations where there are peaks/spikes (or valleys) in the intensity of the first-order derivative(s) of the image. In other words, the peaks in gradient magnitude mark the edge locations, and we need to threshold the gradient magnitude to find edges in an image:
 
+
+
 ![png](images/ch-5-1.png)
+
+
 
 The following code block shows how to compute the gradient (along with the magnitude and the direction) with the convolution kernels shown previously, with the gray-scale chess image as input. It also plots how the image pixel values and the x-component of the gradient vector changes with the y coordinates for the very first row in the image (x=0):
 
@@ -107,6 +111,8 @@ The following diagram shows the output of the preceding code block. As can be se
 In the earlier example, the magnitude and direction of the edges were shown in different images. We can create an RGB image and set the R, G, and B values as follows to display both magnitude and direction in the same image
 
 ![png](images/ch-5-2.png)
+
+
 
 
 ```python
@@ -282,6 +288,8 @@ It has been shown by Rosenfeld and Kak that the simplest isotropic derivative op
 ![png](images/ch-5-3.png)
 
 
+
+
 **Some notes about the Laplacian**
 
 Let's take a look at the following notes:
@@ -444,6 +452,8 @@ As discussed, we can first blur an image and then compute the detail image as th
 
 ![png](images/ch-5-5.png)
 
+
+
 The following code block shows how the unsharp mask operation can be implemented with the SciPy ndimage module for a gray-scale image (the same can be done with a color image, which is left as an exercise for the reader), using the preceding concept:
 
 
@@ -488,10 +498,17 @@ In order to obtain a binary image with each edge one-pixel wide, we need to appl
 
 ### The non-maximum suppression algorithm
 1. The algorithm starts by inspecting the angles (directions) of the edges (output by the edge detector).
+
 2. If a pixel value is non-maximum in a line tangential to its edge angle, it is a candidate to be removed from the edge map.
+
 3. This is implemented by splitting the edge direction (360) into eight equal intervals with an angle of 22.50 degrees. The following table shows different cases and the actions to take
-![png](images/ch-5-9.png)
+
+  ![png](images/ch-5-9.png)
+
+  
+
 4. We may do this by looking in a π/8 range and setting the tangential comparison accordingly with a series of if conditions.
+
 5. The effect of edge thinning is clearly observed (from the previous image) when comparing the gradient image with and without the non-maximum suppression.
 
 ### Sobel edge detector with scikit-image
@@ -501,6 +518,8 @@ http://queirozf.com/entries/matplotlib-pylab-pyplot-etc-what-s-the-different-bet
 The (first order) derivatives can be approximated better than using the finite difference. The Sobel operators shown in the following diagram are used quite frequently
 
 ![png](images/ch-5-10.png)
+
+
 
 The 1/8 term is not included in the standard definition of the Sobel operator as for edge detection purposes, it does not make a difference, although the normalization term is needed to get the gradient value correctly. The next Python code snippet shows how to use the sobel_h(), sobel_y(), and sobel() functions of the filters module of scikit-image to find the horizontal/vertical edges and compute the gradient magnitude using the Sobel operators, respectively:
 
@@ -540,7 +559,10 @@ The screenshot shows the output of the preceding code block. As can be seen, the
 ### Different edge detectors with scikit-image – Prewitt, Roberts, Sobel, Scharr, and Laplace
 
 There are quite a few different edge detection operators used in image processing algorithms; all of them are discrete (first or second order) differentiation operators and they try to approximate the gradient of the image intensity function (for instance, the Sobel operator, which we discussed previously). The kernels shown in the following diagram are a few popular ones used for edge detection. For example, popular derivative filters approximating the 1st Order image derivatives are Sobel, Prewitt, Sharr, and Roberts filters, whereas a derivative filter approximating the 2nd Order derivatives is the Laplacian:
+
 ![png](images/ch-5-11.png)
+
+
 
 As discussed in the scikit-image documentation, the finite-difference approximations of the gradient computed by different operators are different. For example, the Sobel filter in general performs better than the Prewitt filter, whereas the Scharr filter results in a less rotational variance than the Sobel filter. The following code block applies different edge detector filters on the golden gate gray-scale image, and shows the gradient magnitudes obtained:
 
@@ -623,6 +645,8 @@ pylab.show()
 Laplacian of a Gaussian (LoG) is just another linear filter which is a combination of Gaussian followed by the Laplacian filter on an image. Since the 2nd derivative is very sensitive to noise, it is always a good idea to remove noise by smoothing the image before applying the Laplacian to ensure that noise is not aggravated. Because of the associative property of convolution, it can be thought of as taking the 2nd derivative (Laplacian) of the Gaussian filter and then applying the resulting (combined) filter onto the image, hence the name LoG. It can be efficiently approximated using the difference of two Gaussians (DoG) with different scales (variances), as shown in the following diagram:
 
 ![png](images/ch-5-12.png)
+
+
 
 The following code block shows how to compute the LOG filter and the corresponding best DoG approximation (with a given value of σ) and apply them on the same input image, using SciPy signal module's convolve2d() function:
 
@@ -708,10 +732,16 @@ pylab.show()
 ### Edge detection with the LoG filter
 The following describes the steps in edge detection with an LOG filter:
 - First, the input image needs to be smoothed (by convolution with the Gaussian filter).
+
 - Then, the smoothed image needs to be convolved with the Laplacian filter to obtain the output image as ∇2 (I (x,y) * G (x,y)).
+
 - Finally the zero-crossings from the image obtained in the last step need to be computed, as shown in the following diagram:
 
+  
+
 ![png](images/ch-5-13.png)
+
+
 
 ### Edge detection with the Marr and Hildreth's algorithm using the zero-crossing computation
 
@@ -988,7 +1018,9 @@ for i in range(1,4):
 
 ### Reconstructing an image only from its Laplacian pyramid
 The following diagram shows how to reconstruct an image from only its Laplacian pyramid, if we construct one by following the algorithms described in the previous section:
+
 ![png](images/ch-5-14.png)
+
 The following picture shows the output of the preceding code, how the original image is finally constructed from its Laplacian pyramid only using the expand() operation on each level's image, and adding it to the next level's image iteratively
 
 

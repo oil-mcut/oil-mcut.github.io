@@ -27,11 +27,17 @@ Filtering in the frequency domain (with the SciPy ndimage module and scikit-imag
 <p>The convolution theorem says that convolution in an image domain is equivalent to a simple multiplication in the frequency domain:</p>
 ![png](images/ch-3-1.png)
 
+
+
 <p>Following diagram shows the application of fourier transforms:</p>
 ![png](images/ch-3-2.png)
 
+
+
 <p>The next diagram shows the basic steps in frequency domain filtering. We have the original image, F, and a kernel (a mask or a degradation/enhancement function) as input. First, both input items need to be converted into the frequency domain with DFT, and then the convolution needs to be applied, which by convolution theorem is just an (element-wise) multiplication. This outputs the convolved image in the frequency domain, on which we need to apply IDFT to obtain the reconstructed image (with some degradation or enhancement on the original image):</p>
 ![png](images/ch-3-3.png)
+
+
 
 **Import libraries**
 
@@ -769,6 +775,8 @@ The screenshot shows the output of the preceding code block, the restored image 
 
 <p>In image restoration, the degradation is modeled. This enables the effects of the degradation to be (largely) removed. The challenge is the loss of information and noise. The following diagram shows the basic image degradation model: </p>
 ![png](images/ch-3-4.png)
+
+
 
 <p>In the next few sections, we will describe a couple of degradation models (namely _***inverse***_ and Wiener filters).</p>
 ### Deconvolution and inverse filtering with FFT

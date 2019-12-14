@@ -29,15 +29,25 @@ Many of the ideas are from the two original YOLO papers, available at https:/
 
 ## Classifying and localizing images and detecting objects                                                       
 Let's first understand the concepts regarding classification, localization, detection, and object detection problems, how they can be transformed into supervised machine learning problems, and subsequently, how they can be solved using a deep convolution neural network.Refer to the following diagram:
+
 ![png](images/ch-11-1.png)
+
+
 
 Here's what we can infer:
 - In the image classification problem, there is generally a (big) central object in an image and we have to recognize the object by assigning a correct label to the image. 
+
 - Image classification with localization aims to find the location of an object in an image by not only assigning a label (class) the image (for example, a binary classification problem: whether there is a car in an image or not), but also finding a bounding box around the object, if there is one to be found.
+
 - Detection goes a level further by aiming to identify multiple instances of same/different types of objects, by localizing all the objects (all instances) by marking their locations (the localization problem usually tries to find a single object location).
+
 - The localization problem can be converted to a supervised machine learning multi-class classification and a regression problem in the following way: in addition to the class labels of the objects to be identified (with classification), the output vector corresponding to an input training image must also contain the location (bounding box coordinates relative to image size, with regression) of the object.
+
 - A typical output data vector will contain eight entries for a 4-class classification. As shown in the following diagram, the first entry will correspond to whether or not an object of any from the three classes of objects (except the background). If one is present in an image, the next four entries will define the bounding box containing the object, followed by three binary values for the three class labels indicating the class of the object. If none of the objects are present, the first entry will be 0 and the others will be ignored:
-![png](images/ch-11-2.png)
+
+  ![png](images/ch-11-2.png)
+
+  
 
 ## Proposing and detecting objects using CNNs                                                        
 Moving from localization to detection, we can proceed in two steps, as shown in the following screenshot: first use small tightly cropped images to train a convolution neural net for image classification, and then use sliding windows of different window sizes (smaller to larger) to classify a test image within that window using the convnet learnt and run the windows sequentially through the entire image, but it’s infeasibly slow computationally.
@@ -58,8 +68,9 @@ The following are the steps that you must follow to be able to use the pre-train
 1. Clone this repository: go to https://github.com/allanzelener/YAD2K/, right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
 2. Download the weights and cfg file from https://pjreddie.com/darknet/yolo/ by clicking on the yellow links on the page, marked by red boxes here:
-    ![png](images/ch-11-3.png)
-
+    
+![png](images/ch-11-3.png)
+    
 3. Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
 
 4. Go inside the YAD2K-master folder, open a command prompt (you need to have Python3 installed and in path) and run the following command:
@@ -515,9 +526,14 @@ DeepLab presents an architecture for controlling signal decimation and learning 
 
 ### DeepLab v3 architecture                                                        
 The image shows the parallel modules with atrous convolution:
+
 ![png](images/ch-11-5.png)
+
 With DeepLab-v3+, the DeepLab-v3 model is extended by adding a simple, yet effective, decoder module to refine the segmentation results, especially along object boundaries. The depth-wise separable convolution is applied to both atrous spatial pyramid pooling and decoder modules, resulting in a faster and stronger encoder-decoder network for semantic segmentation. The architecture is shown in the following diagram:
+
 ![png](images/ch-11-6.png)
+
+
 
 ### Steps you must follow to use DeepLab V3+ model for semantic segmentation
 Here are the steps that must be followed to be able to use the model to segment an image:
@@ -562,7 +578,10 @@ os.chdir('..')
 ![png](img/Chapter11/output_17_0.png)
 
 You can obtain the labels of the segments and create an overlay with yet another input image, as shown in the following diagram:
+
 ![png](images/ch-11-7.png)
+
+
 
 ### Transfer Learning what it is, and when to use it 
 Transfer learning is a deep learning strategy that reuses knowledge gained from solving one problem by applying it to a different, but related, problem. For example, let's say we have three types of flowers, namely, a rose, a sunflower, and a tulip. We can use the standard pre-trained models, such as VGG16/19, ResNet50, or InceptionV3 models (pre-trained on ImageNet with 1000 output classes, which can be found at https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a) to classify the flower images, but our model wouldn't be able to correctly identify them because these flower categories were not learned by the models. In other words, they are classes that the model is not aware of.
@@ -573,13 +592,19 @@ The following image shows how the flower images are classified wrongly by the pr
 
 ### Transfer learning with Keras                                                        
 Training of pre-trained models is done on many comprehensive image classification problems. The convolutional layers act as a feature extractor, and the fully connected (FC) layers act as classifiers, as shown in the following diagram, in the context of cat vs. dog image classification with a conv net:
+
 ![png](images/ch-11-9.png)
+
 Since the standard models, such as VGG-16/19, are quite large and are trained on many images, they are capable of learning many different features for different classes. We can simply reuse the convolutional layers as a feature extractor that learns low and high level image features, and train only the FC layer weights (parameters). This is what transfer learning is.
 
 We can use transfer learning when we have a training set that is concise, and the problem that we are dealing with is the same as that on which the pre-trained model was trained. We can tweak the convolutional layers if we have ample data, and learn all the model parameters from scratch so that we can train the models to learn more robust features relevant to our problem. 
 
 Now, let's use transfer learning to classify rose, sunflower and tulip flower images. These images are obtained from the TensorFlow sample image dataset, available at http://download.tensorflow.org/example_images/flower_photos.tgz. Let's use 550 images for each of the three classes, making a total of 1,650 images, which is a small number of images and the right place to use transfer learning. We'll use 500 images from each class for training, reserving the remaining 50 images from each class for validation. Also, let's create a folder called flower_photos, with two sub-folders, train and valid, inside it, and save our training and validation images inside those folders, respectively. The folder structure should look such as the following:
+
 ![png](images/ch-11-10.png)
+
+
+
 We will first load the weights of the convolution layers only for the pre-trained VGG16 model (with include_top=False, let's not load the last two FC layers), which will act as our classifier. Note that the last layer has a shape of 7 x 7 x 512.
 
 We will use the ImageDataGenerator class to load the images, and the flow_from_directory() function to generate batches of images and labels. We will also use model.predict() function to pass the image through the network, giving us a 7 x 7 x 512 dimensional tensor and subsequently reshape the tensor into a vector. We will find the validation_features in the same way.
@@ -795,7 +820,9 @@ It attempts to merge two images based on the following parameters
 The NST algorithm uses these parameters to create a third, generated image (G). The generated image G combines the content of the image C with the style of image S.
 
 Here is an example of what we will actually be doing: 
+
 ![png](images/ch-11-11.png)
+
 Surprised? I hope you liked the filter applied on the Mona Lisa! Excited to implement this? Let's do it with transfer learning. 
 
 ###  Implementation of NST with transfer learning                                                        
@@ -816,7 +843,9 @@ We now thoroughly know that top layers of a convolutional network detect lower l
 We are going to get more visually pleasing outputs if we choose the middle layers of the network ourselves, meaning that it's neither too shallow, nor too deep.
 
 The content loss or feature reconstruction loss (which we want to minimize) can be represented as the following:
+
 ![png](images/ch-11-12.png)
+
 Here, nW, nH, and nC are width, height, and number of channels in the chosen hidden layer, respectively. In practice, the following happens:
 
 - The content cost takes a hidden layer activation of the neural network, and measures how different a(C) and a(G) are.
@@ -826,9 +855,13 @@ Here, nW, nH, and nC are width, height, and number of channels in the chosen 
 We first need to compute the style, or Gram matrix, by computing the matrix of dot products from the unrolled filter matrix.
 
 The style loss for the hidden layer a can be represented as the following:
+
 ![png](images/ch-11-13.png)
+
 We want to minimize the distance between the Gram matrices for the images S and G. The overall weighted style loss (which we want to minimize) is represented as the following:
+
 ![png](images/ch-11-14.png)
+
 Here, λ represents the weights for different layers. Bear the following in mind:
 
 - The style of an image can be represented using the Gram matrix of a hidden layer’s activations. However, we get even better results combining this representation from multiple different layers. This is in contrast to the content representation, where usually using just a single hidden layer is sufficient.
@@ -836,7 +869,9 @@ Here, λ represents the weights for different layers. Bear the following in mi
 
 ### Computing the overall loss                                                        
 A cost function that minimizes both the style and the content cost is the following:
+
 ![png](images/ch-11-15.png)
+
 Sometimes, to encourage spatial smoothness in the output image G, a total variation regularizer TV(G) is also added to the RHS convex combination.
 
 In this section, however, we shall not use transfer learning. If you are interested, you can follow the link provided in the further reading and references section. Instead, we are going to use a pre-trained Torch model (Torch is yet another deep learning library) with a particular image style, namely, the Starry Night painting by Van Gogh.
