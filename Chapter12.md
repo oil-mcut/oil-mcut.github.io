@@ -60,7 +60,7 @@ plt.imshow(img)
 ```
 
     (821, 616, 3)
-
+    
     <matplotlib.image.AxesImage at 0x1b4fe1fe748>
 
 
@@ -81,7 +81,7 @@ plt.imshow(resized)
 
 
     (821, 416, 3)
-
+    
     <matplotlib.image.AxesImage at 0x1b4fe06bda0>
 
 
@@ -120,7 +120,7 @@ plt.subplot(122), plt.imshow(mask_img), plt.title('Mask for the object to be rem
 ```
 
     (720, 534, 3)
-
+    
     (<matplotlib.axes._subplots.AxesSubplot at 0x1b4810e85f8>,
      <matplotlib.image.AxesImage at 0x1b4811067f0>,
      <matplotlib.text.Text at 0x1b480db4160>)
@@ -153,9 +153,16 @@ plt.show()
 The goal of Poisson image editing is to perform seamless blending (cloning) of an object or a texture from a source image (captured by a mask image) to a target image. We want to create a photomontage by pasting an image region onto a new background using Poisson image editing. This idea is from the SIGGRAPH 2003 paper, Poisson Image Editing, by Perez et alia. The problem is first expressed in the continuous domain as a constrained variational optimization problem (the Euler-Lagrange equation is used to find a solution), and then can be solved using a discrete Poisson solver. The main task of the discrete Poisson solver is to solve a huge linear system. The central insight in the paper is that working with image gradients, instead of image intensities, can produce much more realistic results. After seamless cloning, the gradient of the output image in the masked region is the same as the gradient of the source region in the masked region. Additionally, the intensity of the output image at the boundary of the masked region is the same as the intensity of the destination image.
 
 In this section, we shall demonstrate seamless cloning with Python and OpenCV (with the seamlessClone() function introduced in OpenCV 3.0). Let's use this function to copy the bird from the sky in the source image (with the help of a mask image) to the sky in the destination sea-bird image. These are the photos that we'll be using:
+
 ![png](images/ch-12-2.png)
+
+
+
 destination image:
+
 ![png](images/ch-12-3.png)
+
+
 
 The next code block shows how to implement seamless cloning by invoking the function with the right arguments. In this example, the cloning type flag used is NORMAL_CLONE, where the texture (gradient) of the source image is preserved in the cloned region:
 
