@@ -219,7 +219,7 @@ body{
 .kw {
   font-size: 20px;
   color: #08A;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .kw-1 {
