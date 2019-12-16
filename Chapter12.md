@@ -14,27 +14,27 @@ permalink: /chapter-12/
   - [Content-aware image resizing with seam carving](#Content-aware image resizing with seam carving)
   - [Object removal with seam carving](#Object removal with seam carving  )
 
-- [Seamless cloning and Poisson image editing](Seamless cloning and Poisson image editing)
+- [Seamless cloning and Poisson image editing](#Seamless cloning and Poisson image editing)
 
-- [Image inpainting](Image inpainting)
+- [Image inpainting](#Image inpainting)
 
-- [Variational image processing](Variational image processing)
+- [Variational image processing](#Variational image processing)
 
-- [Total Variation Denoising](Total Variation Denoising)
+- [Total Variation Denoising](#Total Variation Denoising)
 
-- [Creating flat-texture cartoonish images with total variation denoising](Creating flat-texture cartoonish images with total variation denoising)
+- [Creating flat-texture cartoonish images with total variation denoising](#Creating flat-texture cartoonish images with total variation denoising)
 
-- [Image quilting](Image quilting)
+- [Image quilting](#Image quilting)
 
-- [Texture synthesis](Texture synthesis)   
+- [Texture synthesis](#Texture synthesis)   
 
-- [Texture transfer](Texture transfer)
+- [Texture transfer](#Texture transfer)
 
-- [Face morphing](Face morphing ) 
+- [Face morphing](#Face morphing ) 
 
-- [Summary](Summary)
+- [Summary](#Summary)
 
-- [Further reading](Further reading)
+- [Further reading](#Further reading)
 
 
 
