@@ -60,7 +60,7 @@ YOLO, is a very popular and fully conventional algorithm that is used for detect
 
 In this section, we will detect objects in images with a fully convolutional network (FCN) deep learning model. Given an image with some objects (for example, animals, cars, and so on), the goal is to detect objects in those images using a pre-trained YOLO model, with bounding boxes.
 
-Many of the ideas are from the two original YOLO papers, available at [this paper](https://arxiv.org/abs/1506.02640 and (this](https://arxiv.org/abs/1612.08242). But before diving into the YOLO model, let's first understand some prerequisite fundamental concepts.
+Many of the ideas are from the two original YOLO papers, available at [this paper](https://arxiv.org/abs/1506.02640) and [this](https://arxiv.org/abs/1612.08242). But before diving into the YOLO model, let's first understand some prerequisite fundamental concepts.
 
 <a name='Classifying and localizing images and detecting objects'></a>
 
@@ -109,32 +109,32 @@ To reduce the computational expense in training the YOLO model, we will be using
 
 #### Using a pre-trained YOLO model for object detection                                                        
 The following are the steps that you must follow to be able to use the pre-trained model:
-1. Clone this repository: [go to here](https://github.com/allanzelener/YAD2K/), right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
+- Clone this repository: [go to here](https://github.com/allanzelener/YAD2K/), right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
-2. Download the weights and cfg file [from here](https://pjreddie.com/darknet/yolo/) by clicking on the yellow links on the page, marked by red boxes here:
+- Download the weights and cfg file [from here](https://pjreddie.com/darknet/yolo/) by clicking on the yellow links on the page, marked by red boxes here:
    
    
 
-<img src="/images/ch-11-3.png">
+![png](images/ch-11-3.png)
     
 
 
 
-3. Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
+- Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
 
-4. Go inside the YAD2K-master folder, open a command prompt (you need to have Python3 installed and in path) and run the following command:
+- Go inside the YAD2K-master folder, open a command prompt (you need to have Python3 installed and in path) and run the following command:
 
     python yad2k.py yolov2.cfg yolov2.weights yolo/yolo.h5
 
 
     If executed successfully, it will create two files inside the YAD2K-master/model_data folder, namely, yolo.h5 and yolo.anchors.
 
-5. Now go to the folder from where you want to run your code. Create a folder named yolo here and copy the four files (coco_classes, pascal_classes, yolo.h5, yolo.anchors) from the YAD2K-master/model_data folder to the yolo folder you created.
-6. Copy the yad2k folder from the YAD2K-master folder to the current path. Your current path should have these two folders, yad2k and yolo, now. 
-7. Create a new folder named images in the current path and put your input images here.
-8. Create another new empty folder named output in the current path. The YOLO model will save the output images (with objects detected) here.
-9. Create a .py script in the current path and copy-paste the following code and run (or run in from Jupyter Notebook cell from the current path). 
-10. Double-check that the folder structure is exactly as shown in the following screenshot, with the required files present, before running the code:
+- Now go to the folder from where you want to run your code. Create a folder named yolo here and copy the four files (coco_classes, pascal_classes, yolo.h5, yolo.anchors) from the YAD2K-master/model_data folder to the yolo folder you created.
+- Copy the yad2k folder from the YAD2K-master folder to the current path. Your current path should have these two folders, yad2k and yolo, now. 
+- Create a new folder named images in the current path and put your input images here.
+- Create another new empty folder named output in the current path. The YOLO model will save the output images (with objects detected) here.
+- Create a .py script in the current path and copy-paste the following code and run (or run in from Jupyter Notebook cell from the current path). 
+- Double-check that the folder structure is exactly as shown in the following screenshot, with the required files present, before running the code:
 
 ![png](images/ch-11-4.png)
 
