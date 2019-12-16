@@ -1,6 +1,8 @@
-ayout: page
+---
+layout: page
 title: Chapter 11 Deep Learning - Object Detection, Segmentation, Transfer Learning and Neural Style Transfer
 permalink: /chapter-11/
+---
 
 **Author: Sandipan Dey**
 
