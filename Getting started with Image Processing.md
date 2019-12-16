@@ -1051,5 +1051,6 @@ In this chapter, we first provided a basic introduction to image processing and 
 - [pillow](https://pillow.readthedocs.io/en/3.1.x/reference/Image.html)
 - [scipy](https://docs.scipy.org/doc/scipy-1.1.0/reference/ndimage.html)
 - [matplotlib](https://matplotlib.org/galleryhttp://members.cbio.mines-paristech.fr/~nvaroquaux/formations/scipy-lecture-notes/advanced/image_processing/index.html)
-- [scipy lecture](http://www.scipy-lectures.org/https://web.cs.wpi.edu/~emmanuel/courses/cs545/S14/slides/lecture09.pdfhttp://fourier.eng.hmc.edu/e161/lectures/e161ch1.pdfhttp://www.eie.polyu.edu.hk/~enyhchan/imagef.pdf)
+- [scipy lecture](http://www.scipy-lectures.org/https://web.cs.wpi.edu/~emmanuel/courses/cs545/S14/slides/lecture09.pdf)
+- [fourier theory](http://fourier.eng.hmc.edu/e161/lectures/e161ch1.pdfhttp://www.eie.polyu.edu.hk/~enyhchan/imagef.pdf)
 - [teaching material cs cornell](http://www.cs.cornell.edu/courses/cs1114/2009sp/lectures/CS1114-lec14.pdfhttp://eeweb.poly.edu/~yao/EL5123/lecture12_ImageWarping.pdf)
