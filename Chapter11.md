@@ -115,7 +115,7 @@ The following are the steps that you must follow to be able to use the pre-train
    
    
 
-<img src="images/ch-11-3.png">
+<img src="/images/ch-11-3.png">
     
 
 
