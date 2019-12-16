@@ -68,7 +68,7 @@ Many of the ideas are from the two original YOLO papers, available at [this p
 Let's first understand the concepts regarding classification, localization, detection, and object detection problems, how they can be transformed into supervised machine learning problems, and subsequently, how they can be solved using a deep convolution neural network.Refer to the following diagram:
 
 <div class="fig figcenter fighighlight">
-    <img src="images/ch-11-1.png" width="80%">
+    <img src="/images/ch-11-1.jpg" width="80%">
 </div>
 
 Here's what we can infer:
