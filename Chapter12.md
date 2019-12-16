@@ -4,9 +4,41 @@ title: Chapter 12 Some Additional Problems in Image Processing
 permalink: /chapter-12/
 ---
 
-
-
 **Author: Sandipan Dey**
+
+**Table of content**
+
+- [Additional Problems in Image Processing](#Additional Problems in Image Processing)
+
+- [Seam carving](#Seam carving)
+  - [Content-aware image resizing with seam carving](#Content-aware image resizing with seam carving)
+  - [Object removal with seam carving](#Object removal with seam carving  )
+
+- [Seamless cloning and Poisson image editing](Seamless cloning and Poisson image editing)
+
+- [Image inpainting](Image inpainting)
+
+- [Variational image processing](Variational image processing)
+
+- [Total Variation Denoising](Total Variation Denoising)
+
+- [Creating flat-texture cartoonish images with total variation denoising](Creating flat-texture cartoonish images with total variation denoising)
+
+- [Image quilting](Image quilting)
+
+- [Texture synthesis](Texture synthesis)   
+
+- [Texture transfer](Texture transfer)
+
+- [Face morphing](Face morphing ) 
+
+- [Summary](Summary)
+
+- [Further reading](Further reading)
+
+
+
+<a name='Additional Problems in Image Processing'></a>
 
 ## Additional Problems in Image Processing                                                        
 In this chapter, we will discuss a few more advanced problems in image processing. We'll start with the seam carving problem and demonstrate a couple of applications, the first one being the content-aware image resizing, and the second one being object removal from images. Next, we'll discuss seamless cloning, which can be used to seamlessly copy one object from an image to another image. Then we'll discuss an inpainting algorithm that can be used to restore damaged pixels in an image. After that, we'll look at variational methods in image processing with an application in image denoising. Next, we'll discuss the image quilting algorithm and its applications in texture synthesis and the transfer of images. We shall end our discussion with a sophisticated face morphing algorithm. 
@@ -19,7 +51,9 @@ The topics to be covered in this chapter are as follows:
 - Image quilting
 - Face morphing
 
-## Seam carving
+<a name='Seam carving'></a>
+
+### Seam carving
 Seam carving is a content-aware image resizing technique where the image is reduced in size by one pixel in height (or width) at a time. A vertical seam in an image is a path of pixels connected from the top to the bottom with one pixel in each row. A horizontal seam is a path of pixels connected from the left to the right with one pixel in each column. Although the underlying algorithm is simple and elegant, it was not discovered until 2007.
 
 Now it is now a core feature in Adobe Photoshop and other computer graphics applications. Unlike standard content-agnostic resizing techniques, such as cropping and scaling, seam carving preserves the most interesting features of the image, such as aspect ratio, set of objects present, and so on. Finding and removing a seam involves three parts:
@@ -31,7 +65,9 @@ Now it is now a core feature in Adobe Photoshop and other computer graphics appl
 
 In the following two subsections, we'll discuss a couple of applications of the seam carving technique, the first one being content-aware image resizing, and the second one being object removal from images. The implementations of these will be done with scikit-image library's transform module's functions.
 
-## Content-aware image resizing with seam carving                                                        
+<a name='Content-aware image resizing with seam carving'></a>
+
+### Content-aware image resizing with seam carving                                                        
 The following code demonstrates how the scikit-image library's transform module's seam_curve() function can be used for content-aware image resizing. Let's first import the required packages, load the original input airplane image, and display the image using the following code block:
 
 
@@ -104,8 +140,10 @@ plt.imshow(out)
 
 ![png](img/Chapter12/output_6_1.png)
 
+<a name='Object removal with seam carving'></a>
 
-## Object removal with seam carving                                                        
+### Object removal with seam carving                                                        
+
 You can use seam carving to remove objects or artifacts from images too. This requires weighting the object region with low values, since the lower weights are preferentially removed in seam carving. The following code block uses a mask image of the same shape as the original input photo that masks the region of the photo containing the dog with a low weight, indicating that it should be removed:
 
 
@@ -148,8 +186,10 @@ plt.show()
 
 ![png](img/Chapter12/output_9_1.png)
 
+<a name='Seamless cloning and Poisson image editing'></a>
 
-## Seamless cloning and Poisson image editing                                                        
+### Seamless cloning and Poisson image editing                                                        
+
 The goal of Poisson image editing is to perform seamless blending (cloning) of an object or a texture from a source image (captured by a mask image) to a target image. We want to create a photomontage by pasting an image region onto a new background using Poisson image editing. This idea is from the SIGGRAPH 2003 paper, Poisson Image Editing, by Perez et alia. The problem is first expressed in the continuous domain as a constrained variational optimization problem (the Euler-Lagrange equation is used to find a solution), and then can be solved using a discrete Poisson solver. The main task of the discrete Poisson solver is to solve a huge linear system. The central insight in the paper is that working with image gradients, instead of image intensities, can produce much more realistic results. After seamless cloning, the gradient of the output image in the masked region is the same as the gradient of the source region in the masked region. Additionally, the intensity of the output image at the boundary of the masked region is the same as the intensity of the destination image.
 
 In this section, we shall demonstrate seamless cloning with Python and OpenCV (with the seamlessClone() function introduced in OpenCV 3.0). Let's use this function to copy the bird from the sky in the source image (with the help of a mask image) to the sky in the destination sea-bird image. These are the photos that we'll be using:
@@ -195,8 +235,10 @@ cv2.imwrite("../images/sea_bird.jpg", output);
 
     (501, 1401, 3) (576, 768, 3) (480, 698, 3)
 
+<a name='Image inpainting'></a>
 
-## Image inpainting                                                        
+### Image inpainting                                                        
+
 Inpainting is the process of restoring damaged or missing parts of an image. Suppose we have a binary mask, D, that specifies the location of the damaged pixels in the input image, f, as shown here:
 
 ![png](images/ch-12-4.png)
@@ -264,14 +306,20 @@ from skimage.measure import compare_psnr
 compare_psnr(image_orig, image_result)
 ```
 
-## Variational image processing                                                       
+<a name='Variational image processing'></a>
+
+### Variational image processing                                                       
+
 In this section, we shall very briefly discuss variational methods in image processing, with an example application in denoising. Image processing tasks can be viewed as function estimation (for example, segmentation can be thought of as finding a smooth closed curve between an object and the background). Calculus of variations can be used for minimization of the appropriately defined energy functionals (with the Euler-Langrange method) for a specific image processing task, and the gradient descent method is used to evolve towards the solution.
 
 The following diagram describes the basic steps in an image processing task, represented as a variational optimization problem. First, we need to create an energy functional E that describes the quality of the input image u. Then, with the Euler-Lagrange equation, we need to calculate the first variation. Next, we need to set up a partial differentail equation (PDE) for the steepest descent minimization and discretize it and evolve towards the minimum:
 
 ![png](images/ch-12-5.png)
 
-## Total Variation Denoising                                                        
+<a name='Total Variation Denoising'></a>
+
+### Total Variation Denoising                                                        
+
 The following shows the linear and non-linear Total Variation Denoising algorithms. As can be observed in the following, the energy functional is the only difference:
 
 ![png](images/ch-12-6.png)
@@ -300,8 +348,10 @@ plt.show()
 
 ![png](img/Chapter12/output_18_0.png)
 
+<a name='Creating flat-texture cartoonish images with total variation denoising'></a>
 
-## Creating flat-texture cartoonish images with total variation denoising                                                        
+### Creating flat-texture cartoonish images with total variation denoising                                                        
+
 Total variation denoising can be used to produce cartoonish images; that is, piecewise-constant images, as demonstrated. The more we increase the weight, the flatter the textures (at the expense of fidelity to the input image):
 
 
@@ -321,16 +371,21 @@ plt.show()
 
 ![png](img/Chapter12/output_20_0.png)
 
+<a name='Image quilting'></a>
 
-## Image quilting                                                        
-The image quilting algorithm is an algorithm used for texture synthesis and transfer in images, described in the SIGGRAPH 2001 paper by Efros and Freeman. In this section, we shall touch upon the main idea behind the quilting algorithms for implementing texture synthesis and transfer, and show a couple of results obtained with an implementation of the algorithm. The code is left for the reader to implement (refer to https://sandipanweb.wordpress.com/2017/10/24/some-computational-photography-image-quilting-texture-synthesis-with-dynamic-programming-and-texture-transfer-in-python/ for more information).
+### Image quilting                                                        
 
-##  Texture synthesis                                                        
+The image quilting algorithm is an algorithm used for texture synthesis and transfer in images, described in the SIGGRAPH 2001 paper by Efros and Freeman. In this section, we shall touch upon the main idea behind the quilting algorithms for implementing texture synthesis and transfer, and show a couple of results obtained with an implementation of the algorithm. The code is left for the reader to implement ([refer to this link](https://sandipanweb.wordpress.com/2017/10/24/some-computational-photography-image-quilting-texture-synthesis-with-dynamic-programming-and-texture-transfer-in-python/) for more information).
+
+<a name='Texture synthesis'></a>
+
+###  Texture synthesis                                                        
+
 Texture synthesis refers to the creation of a larger texture image from a small sample. For texture synthesis, the main idea is to sample patches and lay them down in overlapping patterns, such that the overlapping regions are similar. The overlapping regions may not match exactly, which will result in noticeable artifacts around the edges. To fix this, we need to compute a path along pixels with similar intensities through the overlapping region, and use this path to select on which overlapping patch to draw each pixel. The following shows the output generated by the algorithm for texture synthesis:
 
 ![png](images/ch-12-7.png)
 
-
+<a name='Texture transfer'></a>
 
 ## Texture transfer                                                        
 Texture transfer refers to giving an object the appearance of having the same texture as a sample, while still preserving its basic shape. Texture transfer is achieved by encouraging sampled patches to have a similar appearance to a given target image, as well as matching overlapping regions of already sampled patches. The following screenshot shows the output generated by the algorithm for texture transfer:
@@ -338,6 +393,8 @@ Texture transfer refers to giving an object the appearance of having the same 
 ![png](images/ch-12-8.png)
 
 
+
+<a name='Face morphing'></a>
 
 ## Face morphing                                                        
 In Chapter 1, Getting Started with Image Processing, we discussed a naive face morphing technique based on simple α-blending, which looks terrible if the faces to be morphed are not aligned.
@@ -358,10 +415,15 @@ The implementation of this algorithm is left to the reader. The following figure
 
 
 
+<a name='Summary'></a>
+
 ## Summary                                                        
+
 In this chapter, we discussed a few advanced image processing problems. We started with the seam carving algorithm and demonstrated a couple of applications of the algorithm in context-aware image resizing and object or artifact removal from images with the scikit-image library
 
 Next, we discussed seamless cloning with an application to copy one object from one image to another using Python and OpenCV. Then we discussed the biharmonic inpainting algorithm and applied it to restore damaged pixels in an image using the scikit-image library. After that, we discussed variational methods in image processing with an application in image denoising with scikit-image again. Next, we discussed the image quilting algorithm and its application in texture synthesis and transfer of images. Finally, we ended this chapter with a discussion on an advanced face morphing algorithm. By the end of this chapter, the reader should be able to write Python codes for all these tasks.
+
+<a name='Further reading'></a>
 
 ## Further reading                                                        
 - [Shai Avidan and Ariel Shamir: Seam Carving for Content-Aware Image Resizing](http://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Avidan07.pdf)
@@ -369,7 +431,7 @@ Next, we discussed seamless cloning with an application to copy one object from 
 - [Quilting for Texture Synthesis and Transfer](http://www.merl.com/publications/docs/TR2001-17.pdf)
 - [Image inpainting by biharmonic functions](https://arxiv.org/pdf/1707.06567.pdf)
 - [Feature-Based Image Metamorphosis](https://www.cs.toronto.edu/~mangas/teaching/320/assignments/a4/Beier-SIG92.pdf)
-- https://sandipanweb.wordpress.com/2017/10/14/seam-carving-using-dynamic-programming-to-implement-context-aware-image-resizing-in-python/
-- https://sandipanweb.wordpress.com/2017/10/03/some-variational-image-processing-possion-image-editing-and-its-applications/
-- https://sandipanweb.wordpress.com/2017/10/08/some-more-variational-image-processing-diffusiontv-denoising-image-inpainting/
+- [https://sandipanweb.wordpress.com/2017/10/14/seam-carving-using-dynamic-programming-to-implement-context-aware-image-resizing-in-python/](https://sandipanweb.wordpress.com/2017/10/14/seam-carving-using-dynamic-programming-to-implement-context-aware-image-resizing-in-python/)
+- [https://sandipanweb.wordpress.com/2017/10/03/some-variational-image-processing-possion-image-editing-and-its-applications/](https://sandipanweb.wordpress.com/2017/10/03/some-variational-image-processing-possion-image-editing-and-its-applications/)
+- [https://sandipanweb.wordpress.com/2017/10/08/some-more-variational-image-processing-diffusiontv-denoising-image-inpainting/](https://sandipanweb.wordpress.com/2017/10/08/some-more-variational-image-processing-diffusiontv-denoising-image-inpainting/)
 

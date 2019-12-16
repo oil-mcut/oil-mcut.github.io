@@ -6,6 +6,38 @@ permalink: /chapter-11/
 
 **Author: Sandipan Dey**
 
+**Table of content**
+
+- [Introducing YOLO v2](#Introducing YOLO v2)
+
+- [Classifying and localizing images and detecting objects](#Classifying and localizing images and detecting objects)
+
+- [Proposing and detecting objects using CNNs](#Proposing and detecting objects using CNNs)
+
+  - [Using YOLO v2](#Using YOLO v2)
+
+  - [Using a pre-trained YOLO model for object detection](#Using a pre-trained YOLO model for object detection)
+
+- [Semantic Segmentation](#Semantic Segmentation)
+
+  - [with DeepLab V3+](#with DeepLab V3+)
+  - [DeepLab v3 architecture](#DeepLab v3 architecture)
+  - [Steps you must follow to use DeepLab](#Steps you must follow to use DeepLab)
+
+- [Transfer Learning what it is, and when to use it](#Transfer Learning what it is, and when to use it)
+
+  - [Transfer learning with Keras](#Transfer learning with Keras)
+
+- [Neural style transfers with cv2 using a pre-trained torch model](#Neural style transfers with cv2 using a pre-trained torch model)
+
+- [Neural style transfer with Python and OpenCV](#Neural style transfer with Python and OpenCV)
+
+- [Summary](#Summary)
+
+- [Further reading](#Further reading)
+
+
+
 In this chapter, we'll continue our discussion on the recent advances in image processing with deep learning. We will be dealing with a few problems in particular, and shall try to solve them using deep learning with deep CNNs. 
 
 We will look at the object detection problem, understanding the basic concepts involved, then examine how to write code to solve the problem with object proposals and a You Only Look On (YOLO) v2 pre-trained deep neural network in Keras. You will be provided with resources that will help you in training the YOLO net.
@@ -20,14 +52,19 @@ The topics to be covered in this chapter are the following:
 - Transfer learning: what is it and when to use it
 - Deep style transfer with cv2 using a pretrained torch-based deep learning model
 
-## Introducing YOLO v2 
+<a name='Introducing YOLO v2'></a>
+
+### Introducing YOLO v2 
+
 YOLO, is a very popular and fully conventional algorithm that is used for detecting images. It gives a very high accuracy rate compared to other algorithms, and also runs in real time. As the name suggests, this algorithm looks only once at an image. This means that this algorithm requires only one forward propagation pass to make accurate predictions. 
 
 In this section, we will detect objects in images with a fully convolutional network (FCN) deep learning model. Given an image with some objects (for example, animals, cars, and so on), the goal is to detect objects in those images using a pre-trained YOLO model, with bounding boxes.
 
 Many of the ideas are from the two original YOLO papers, available at https://arxiv.org/abs/1506.02640 and https://arxiv.org/abs/1612.08242. But before diving into the YOLO model, let's first understand some prerequisite fundamental concepts.
 
-## Classifying and localizing images and detecting objects                                                       
+<a name='Classifying and localizing images and detecting objects'></a>
+
+### Classifying and localizing images and detecting objects                                                       
 Let's first understand the concepts regarding classification, localization, detection, and object detection problems, how they can be transformed into supervised machine learning problems, and subsequently, how they can be solved using a deep convolution neural network.Refer to the following diagram:
 
 ![png](images/ch-11-1.png)
@@ -49,12 +86,17 @@ Here's what we can infer:
 
   
 
-## Proposing and detecting objects using CNNs                                                        
+<a name='Proposing and detecting objects using CNNs'></a>
+
+### Proposing and detecting objects using CNNs                                                        
+
 Moving from localization to detection, we can proceed in two steps, as shown in the following screenshot: first use small tightly cropped images to train a convolution neural net for image classification, and then use sliding windows of different window sizes (smaller to larger) to classify a test image within that window using the convnet learnt and run the windows sequentially through the entire image, but it’s infeasibly slow computationally.
 
 However, as shown in the next figure, the convolutional implementation of the sliding windows by replacing the fully connected layers with 1 × 1 filters makes it possible to simultaneously classify the image-subset inside all possible sliding windows parallelly, making it much more efficient computationally.
 
-## Using YOLO v2                                                         
+<a name='Using YOLO v2'></a>
+
+#### Using YOLO v2                                                         
 The convolutional sliding windows, although computationally much more efficient, still has the problem of detecting bounding boxes accurately, since the boxes don’t align with the sliding windows and the object shapes also tend to be different. The YOLO algorithm overcomes this limitation by dividing a training image into grids and assigning an object to a grid if and only if the center of the object falls inside the grid. This way, each object in a training image can get assigned to exactly one grid and then the corresponding bounding box is represented by the coordinates relative to the grid. 
 
 In the test images, multiple adjacent grids may think that an object actually belongs to them. In order to resolve this, the intersection of union (iou) measure is used to find the maximum overlap and the non-maximum-suppression algorithm is used to discard all the other bounding boxes with low-confidence of containing an object, keeping the one with the highest confidence among the competing ones, and discarding the others. Still, there is the problem of multiple objects falling in the same grid. Multiple anchor boxes (of different shapes) are used to resolve the problem, each anchor box of a particular shape being likely to eventually detect an object of a particular shape.
@@ -63,7 +105,9 @@ If we want YOLO to recognize 80 classes that we have, we will represent the clas
 
 To reduce the computational expense in training the YOLO model, we will be using pre-trained weights. For more detail about the model, refer to the links provided at the end of the chapter.
 
-## Using a pre-trained YOLO model for object detection                                                        
+<a name='Using a pre-trained YOLO model for object detection'></a>
+
+#### Using a pre-trained YOLO model for object detection                                                        
 The following are the steps that you must follow to be able to use the pre-trained model:
 1. Clone this repository: go to https://github.com/allanzelener/YAD2K/, right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
@@ -518,11 +562,15 @@ yolo_model = load_model("yolo/yolo.h5")#Print the summery of the model
 yolo_model.summary()
 ```
 
-## Semantic Segmentation 
+<a name='Semantic Segmentation'></a>
+
+### Semantic Segmentation 
 
 In this section, we'll discuss how to use a deep learning FCN to perform semantic segmentation of an image. Before diving into further details, let's clear the basic concepts.
 
 Semantic segmentation refers to an understanding of an image at pixel level; that is, when we want to assign each pixel in the image an object class (a semantic label). It is a natural step in the progression from coarse to fine inference. It achieves fine-grained inference by making dense predictions that infer labels for every pixel so that each pixel is labeled with the class of its enclosing object or region.
+
+<a name='with DeepLab V3+'></a>
 
 ### with DeepLab V3+
 
@@ -530,6 +578,8 @@ DeepLab presents an architecture for controlling signal decimation and learning 
 1. The ResNet architecture
 2. Atrous convolutions
 3. Atrous Spatial Pyramid Pooling
+
+<a name='DeepLab v3 architecture'></a>
 
 ### DeepLab v3 architecture                                                        
 The image shows the parallel modules with atrous convolution:
@@ -540,7 +590,7 @@ With DeepLab-v3+, the DeepLab-v3 model is extended by adding a simple, yet effec
 
 ![png](images/ch-11-6.png)
 
-
+<a name='Steps you must follow to use DeepLab'></a>
 
 ### Steps you must follow to use DeepLab V3+ model for semantic segmentation
 Here are the steps that must be followed to be able to use the model to segment an image:
@@ -590,6 +640,8 @@ You can obtain the labels of the segments and create an overlay with yet anothe
 
 
 
+<a name='Transfer Learning what it is, and when to use it'></a>
+
 ### Transfer Learning what it is, and when to use it 
 Transfer learning is a deep learning strategy that reuses knowledge gained from solving one problem by applying it to a different, but related, problem. For example, let's say we have three types of flowers, namely, a rose, a sunflower, and a tulip. We can use the standard pre-trained models, such as VGG16/19, ResNet50, or InceptionV3 models (pre-trained on ImageNet with 1000 output classes, which can be found at https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a) to classify the flower images, but our model wouldn't be able to correctly identify them because these flower categories were not learned by the models. In other words, they are classes that the model is not aware of.
 
@@ -597,7 +649,10 @@ The following image shows how the flower images are classified wrongly by the pr
 
 ![png](images/ch-11-8.png)
 
+<a name='Transfer learning with Keras'></a>
+
 ### Transfer learning with Keras                                                        
+
 Training of pre-trained models is done on many comprehensive image classification problems. The convolutional layers act as a feature extractor, and the fully connected (FC) layers act as classifiers, as shown in the following diagram, in the context of cat vs. dog image classification with a conv net:
 
 ![png](images/ch-11-9.png)
@@ -814,8 +869,10 @@ plt.show()
 
 ![png](img/Chapter11/output_32_1.png)
 
+<a name='Neural style transfers with cv2 using a pre-trained torch model'></a>
 
-## Neural style transfers with cv2 using a pre-trained torch model                                                        
+### Neural style transfers with cv2 using a pre-trained torch model                                                        
+
 In this section, we will discuss how to use deep learning to implement a ***neural style transfer (NST)***. You will be surprised at the kind of artistic images we can generate using it. Before diving into further details about the deep learning model, let's discuss some of the basic concepts.
 ### Understanding the NST algorithm                                                        
 The NST algorithm was first revealed in a paper on the subject by Gatys et alia in 2015. This technique involves a lot of fun! I am sure you will love implementing this, and will be amazed at the outputs that you'll create.
@@ -843,6 +900,8 @@ The following are the three component loss functions:
 - Total-variation loss
 
 Each component is individually computed and then combined in a single meta-loss function. By minimizing the meta-loss function, we will be, in turn, jointly optimizing the content, style, and total-variation loss as well.
+
+<a name='Ensuring NST with content loss'></a>
 
 ### Ensuring NST with content loss                                                        
 We now thoroughly know that top layers of a convolutional network detect lower level features and the deeper layers detect high-level features of an image. But what about the middle layers? They hold content. And as we want the generated image G to have similar contents as the input, our content image C, we would use some activation layers in between to represent content of an image. 
@@ -882,6 +941,8 @@ A cost function that minimizes both the style and the content cost is the
 Sometimes, to encourage spatial smoothness in the output image G, a total variation regularizer TV(G) is also added to the RHS convex combination.
 
 In this section, however, we shall not use transfer learning. If you are interested, you can follow the link provided in the further reading and references section. Instead, we are going to use a pre-trained Torch model (Torch is yet another deep learning library) with a particular image style, namely, the Starry Night painting by Van Gogh.
+
+<a name='Neural style transfer with Python and OpenCV'></a>
 
 ### Neural style transfer with Python and OpenCV                                                        
 Let's first download the pre-trained Torch model from https://github.com/DmitryUlyanov/online-neural-doodle/blob/master/pretrained/starry_night.t7 and save it in the current folder (where we are planning to run the following code from). Create a folder named output on the current path to save the generated image by the model.
@@ -932,22 +993,27 @@ cv2.imwrite('output/styled.jpg', output)
     
     True
 
+<a name='Summary'></a>
+
 ### Summary                                                      
+
 In this chapter, we discussed a few advanced deep learning applications to solve a few complex image processing problems. We started with basic concepts in image classification with localization and object detection. Then we demonstrated how a popular YOLO v2 FCN pre-trained model can be used to detect objects in images and draw boxes around them. Next, we discussed the basic concepts in semantic segmentation and then demonstrated how to use DeepLab v3+ (along with a summary on its architecture) to perform semantic segmentation of an image. Then we defined transfer learning and explained how and when it is useful in deep learning, along with a demonstration on transfer learning in Keras to classify flowers with a pre-trained VGG16 model. Finally, we discussed how to generate novel artistic images with deep neural style transfer, and demonstrated this with Python and OpenCV and a pre-trained Torch model. You should be familiar with how to use pre-trained deep learning models to solve complex image processing problems. You should be able to load pre-trained models with Keras, Python, and OpenCV, and use the models to predict outputs for different image processing tasks. You should also be able to use transfer learning and implement it with Keras.
 
 In the next chapter, we'll discuss a few more advanced image processing problems.
 
+<a name='Further reading'></a>
+
 ### Further reading
-- http://www.deeplearning.ai
-- http://www.learnopencv.com
-- http://pyimagesearch.com
-- https://arxiv.org/abs/1506.02640
-- https://arxiv.org/abs/1612.08242
-- https://pjreddie.com/darknet/yolo/
-- https://arxiv.org/pdf/1506.02640.pdf
-- https://sandipanweb.wordpress.com/2018/03/11/autonomous-driving-car-detection-with-yolo-in-python/
-- https://arxiv.org/abs/1706.05587
-- https://arxiv.org/pdf/1802.02611.pdf
-- https://arxiv.org/pdf/1508.06576.pdf
-- https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf
-- https://sandipanweb.wordpress.com/2018/01/02/deep-learning-art-neural-style-transfer-an-implementation-with-tensorflow-in-python/
+- [http://www.deeplearning.ai](http://www.deeplearning.ai)
+- [http://www.learnopencv.com](http://www.learnopencv.com)
+- [http://pyimagesearch.com](http://pyimagesearch.com)
+- [https://arxiv.org/abs/1506.02640](https://arxiv.org/abs/1506.02640)
+- [https://arxiv.org/abs/1612.08242](https://arxiv.org/abs/1612.08242)
+- [https://pjreddie.com/darknet/yolo/](https://pjreddie.com/darknet/yolo/)
+- [https://arxiv.org/pdf/1506.02640.pdf](https://arxiv.org/pdf/1506.02640.pdf)
+- [https://sandipanweb.wordpress.com/2018/03/11/autonomous-driving-car-detection-with-yolo-in-python/](https://sandipanweb.wordpress.com/2018/03/11/autonomous-driving-car-detection-with-yolo-in-python/)
+- [https://arxiv.org/abs/1706.05587](https://arxiv.org/abs/1706.05587)
+- [https://arxiv.org/pdf/1802.02611.pdf](https://arxiv.org/pdf/1802.02611.pdf)
+- [https://arxiv.org/pdf/1508.06576.pdf](https://arxiv.org/pdf/1508.06576.pdf)
+- [https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf](https://cs.stanford.edu/people/jcjohns/papers/eccv16/JohnsonECCV16.pdf)
+- [https://sandipanweb.wordpress.com/2018/01/02/deep-learning-art-neural-style-transfer-an-implementation-with-tensorflow-in-python/](https://sandipanweb.wordpress.com/2018/01/02/deep-learning-art-neural-style-transfer-an-implementation-with-tensorflow-in-python/)

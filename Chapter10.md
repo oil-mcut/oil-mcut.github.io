@@ -6,6 +6,41 @@ permalink: /chapter-10/
 
 **Author: Sandipan Dey**
 
+**Table of Content**
+
+- [Deep learning in image processing](#Deep learning)
+
+  - [What is deep learning?](#What is deep learning)
+  - [Classical versus deep learning ](#Classical versus deep learning)    
+  - [Why deep learning](#Why deep learning)
+
+- [CNNs](#CNNs)
+
+  - [Conv or pooling or FC layers – CNN architecture and how it works](#Conv or pooling)
+
+  - [Convolutional layer](#Convolutional layer)
+  - [Pooling layer](#Pooling layer)
+  - [Non-linearity – ReLU layer](#Non-linearity – ReLU layer)
+  - [FC layer](#FC layer)
+  - [Dropout](#Dropout)
+
+- [Image classification with TensorFlow or Keras](#Image classification with TensorFlow or Keras)
+
+  - [Classification of MNIST using Convolutional neural network with Keras](#Classification of MNIST)
+  - [Classification of MNIST using FC network with Keras](#Classification of MNIST using FC network with Keras)
+
+- [Some popular deep CNNs](#Some popular deep CNNs)
+
+  - [VGG-16/19 ](#VGG-16/19 )
+  - [InceptionNet](#InceptionNet)
+  - [ResNet](#ResNet)
+
+- [Summary](#Summary)
+
+- [Further reading](#Further reading)
+
+
+
 In this chapter, we shall discuss recent advances in image processing with deep learning. We'll start by differentiating between classical and deep learning techniques, followed by a conceptual section on convolutional neural networks (CNN), the deep neural net architectures particularly useful for image processing. Then we'll continue our discussion on the image classification problem with a couple of image datasets and how to implement it with TensorFlow and Keras, two very popular deep learning libraries. Also, we'll see how to train deep CNN architectures and use them for predictions. 
 
 The topics to be covered in this chapter are as follows:
@@ -15,11 +50,15 @@ The topics to be covered in this chapter are as follows:
 - Image classification with TensorFlow or Keras with the handwritten digits images dataset
 - Some popular deep CNNs (VGG-16/19, InceptionNet, ResNet) with an application in classifying the cats versus dogs images with the VGG-16 network
 
+<a name='Deep learning'></a>
+
 ### Deep learning in image processing                                                   
 
 The main goal of **Machine Learning (ML)** is **generalization**; that is, we train an algorithm on a training dataset and we want the algorithm to work with high performance (accuracy) on an unseen dataset. In order to solve a complex image processing task (such as image classification), the more training data we have, we may expect better generalization—ability of the ML model learned, provided we have taken care of overfitting (for example, with regularization). But with traditional ML techniques, not only does it become computationally very expensive with huge training data, but also, the learning (improvement in generalization) often stops at a certain point. Also, the traditional ML algorithms often need lots of domain expertise and human intervention and they are only capable of what they are designed for—nothing more and nothing less. This is where deep learning models are very promising
 
-### What is deep learning?                                                  
+<a name='What is deep learning'></a>
+
+#### What is deep learning?                                                  
 
 Some of the well-known and widely accepted definitions of deep learning are as follows:
 - It is a subset of ML.
@@ -34,10 +73,11 @@ For example, for an image classification problem, a deep learning model learns t
 
 First, it automatically extracts low-level features such as identifying light or dark regions, and then it extracts high-level features such as edges. Later, it extracts the highest-level features, such as shapes, so that they can be classified. 
 
-
 Every node or neuron represents a small aspect of the whole image. When put together, they depict the whole image. They are capable of representing the image fully. Moreover, every node and every neuron in the network is assigned weights. These weights represent the actual weight of the neuron with respect to the strength of its relationship with the output. These weights can be adjusted while the models are developed
 
-### Classical versus deep learning                                                        
+<a name='Classical versus deep learning'></a>
+
+#### Classical versus deep learning                                                        
 - Handcrafted versus automated feature extraction: In order to solve image processing problems with traditional ML techniques, the most important preprocessing step is the handcrafted feature (for example, HOG and SIFT) extraction in order to reduce the complexity of an image and make patterns more visible for learning algorithms to work. The biggest advantage of deep learning algorithms is that they try to learn low-level and high-level features from training images in an incremental manner. This eliminates the need for handcrafted feature in extraction or engineering.
 - By parts versus end-to-end solution: Traditional ML techniques solve the problem statement by breaking down the problem, solving different parts first, and then aggregating the results finally to give output, whereas deep learning techniques solve the problem using an end-to-end approach. For example, in an object detection problem, classical ML algorithms such as SVM require a bounding box object detection algorithm that will first identify all of the possible objects that will need to have HOG as input to the ML algorithm in order to recognize correct objects. But a deep learning method, such as the YOLO network, takes the image as input and provides the location and name of the object as output. Clearly end-to-end, isn't it?
 - Training time and advanced hardware: Unlike traditional ML algorithms, deep learning algorithms take a long time to get trained because of the huge number of parameters and relatively huge datasets. Hence, we should always train a deep learning model on high-end hardware such as GPUs and remember to train for a reasonable time, as time is a very important aspect in training the models effectively.
@@ -55,7 +95,10 @@ With deep learning, you can see the hidden layers that we talked about and the d
 
 
 
-### Why deep learning?                                                        
+<a name='Why deep learning'></a>
+
+#### Why deep learning?                                                        
+
 As discussed earlier, if you have more data, the best choice would be deep networks that perform much better with ample data. Many a time, the more data used, the more accurate the result. The classical ML method needs a complex set of ML algorithms and more data is only going to hamper its accuracy. Complex methods then need to be applied to make up for the less accuracy. Moreover, even learning is affected—it is almost stopped at some point in time when more training data is added to train the model.
 This is how this can be depicted graphically
 
@@ -63,12 +106,14 @@ This is how this can be depicted graphically
 
 
 
-
+<a name='CNNs'></a>
 
 ### CNNs                                                        
 CNNs are deep neural networks for which the primarily used input is images. CNNs learn the filters (features) that are hand-engineered in traditional algorithms. This independence from prior knowledge and human effort in feature design is a major advantage. They also reduce the number of parameters to be learned with their shared-weights architecture and possess translation invariance characteristics. In the next subsection, we'll discuss the general architecture of a CNN and how it works
 
-### Conv or pooling or FC layers – CNN architecture and how it works                                                        
+<a name='Conv or pooling'></a>
+
+#### Conv or pooling or FC layers – CNN architecture and how it works                                                        
 The next screenshot shows the typical architecture of a CNN. It consists of one or more convolutional layer, followed by a nonlinear ReLU activation layer, a pooling layer, and, finally, one (or more) fully connected (FC) layer, followed by an FC softmax layer, for example, in the case of a CNN designed to solve an image classification problem.There can be multiple convolution ReLU pooling sequences of layers in the network, making the neural network deeper and useful for solving complex image processing tasks, as seen in the following diagram
 
 ![png](images/ch-10-4.png)
@@ -77,25 +122,35 @@ The next screenshot shows the typical architecture of a CNN. It consists of one 
 
 The next few sections describe each of the layers and how they work.
 
-### Convolutional layer                                                        
+<a name='Convolutional layer'></a>
+
+#### Convolutional layer                                                        
 
 The main building block of CNN is the convolutional layer. The convolutional layer consists of a bunch of convolution filters (kernels), which we already discussed in detail in Chapter 2, Sampling, Fourier Transform, and Convolution. The convolution is applied on the input image using a convolution filter to produce a feature map. On the left side is the input to the convolutional layer; for example, the input image. On the right is the convolution filter, also called the kernel. As usual, the convolution operation is performed by sliding this filter over the input. At every location, the sum of element-wise matrix multiplication goes into the feature map. A convolutional layer is represented by its width, height (the size of a filter is width x height), and depth (number of filters). Stride specifies how much the convolution filter will be moved at each step (the default value is 1). Padding refers to the layers of zeros to surround the input (generally used to keep the input and output image size the same, also known as same padding). The following screenshot shows how 3 x 3 x 3 convolution filters are applied on an RGB image, the first with valid padding and the second with the computation with two such filters with the size of the stride=padding=1
 
 ![png](images/ch-10-5.png)
 
+<a name='Pooling layer'></a>
 
-
-### Pooling layer                                                        
+#### Pooling layer                                                        
 After a convolution operation, a pooling operation is generally performed to reduce dimensionality and the number of parameters to be learned, which shortens the training time, requires less data to train, and combats overfitting. Pooling layers downsample each feature map independently, reducing the height and width, but keeping the depth intact. The most common type of pooling is max pooling, which just takes the maximum value in the pooling window. Contrary to the convolution operation, pooling has no parameters. It slides a window over its input and simply takes the max value in the window. Similar to a convolution, the window size and stride for pooling can be specified.
 
-### Non-linearity – ReLU layer                                                        
+<a name='Non-linearity – ReLU layer'></a>
+
+#### Non-linearity – ReLU layer                                                        
 For any kind of neural network to be powerful, it needs to contain non-linearity. The result of the convolution operation is hence passed through the non-linear activation function. ReLU activation is used in general to achieve non-linearity (and to combat the vanishing gradient problem with sigmoid activation). So, the values in the final feature maps are not actually the sums, but the relu function applied to them
 
-### FC layer                                                        
+<a name='FC layer'></a>
+
+#### FC layer                                                        
 After the convolutional and pooling layers, generally a couple of FC layers are added to wrap up the CNN architecture. The output of both convolutional and pooling layers are 3D volumes, but an FC layer expects a 1D vector of numbers. So, the output of the final pooling layer needs to be flattened to a vector, and that becomes the input to the FC layer. Flattening is simply arranging the 3D volume of numbers into a 1D vector
 
-### Dropout                                                        
+<a name='Dropout'></a>
+
+#### Dropout                                                        
 Dropout is the most popular regularization technique for deep neural networks. Dropout is used to prevent overfitting, and it is typically used to increase the performance (accuracy) of the deep learning task on the unseen dataset. During training time, at each iteration, a neuron is temporarily dropped or disabled with some probability, p. This means all the input and output to this neuron will be disabled at the current iteration. This hyperparameter p is called the dropout rate, and it's typically a number around 0.5, corresponding to 50% of the neurons being dropped out
+
+<a name='Image classification with TensorFlow or Keras'></a>
 
 ### Image classification with TensorFlow or Keras                                                        
 In this section, we shall revisit the problem of handwritten digits classification (with the MNIST dataset), but this time with deep neural networks. We are going to solve the problem using two very popular deep learning libraries, namely TensorFlow and Keras. TensorFlow (TF) is the most famous library used in production for deep learning models. It has a very large and awesome community. However, TensorFlow is not that easy to use. On the other hand, Keras is a high level API built on TensorFlow. It is more user-friendly and easy to use compared to TF, although it provides less control over low-level structures. Low-level libraries provide more flexibility. Hence TF can be tweaked much more as compared to Keras
@@ -136,8 +191,6 @@ print(X_train.shape, X_valid.shape, X_test.shape)
     11493376/11490434 [==============================] - 6s 1us/step
     (50000, 28, 28) (10000, 28, 28) (10000, 28, 28)
 
-
-
 ```python
 image_size = 28
 num_labels = 10
@@ -158,8 +211,6 @@ print('Test set', X_test.shape, X_test.shape)
     Training set (50000, 784) (50000, 784)
     Validation set (10000, 784) (10000, 784)
     Test set (10000, 784) (10000, 784)
-
-
 
 ```python
 def accuracy(predictions, labels):
@@ -220,9 +271,6 @@ with graph.as_default():
     See `tf.nn.softmax_cross_entropy_with_logits_v2`.
 
 
-​    
-
-
 ```python
 num_steps = 6001
 
@@ -281,16 +329,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 11.3%
     Validation accuracy: 40.2%
 
-
-
 ![png](img/Chapter10/output_20_1.png)
 
 
     Minibatch loss at step 500: 13979.980469
     Minibatch accuracy: 91.0%
     Validation accuracy: 91.0%
-
-
 
 ![png](img/Chapter10/output_20_3.png)
 
@@ -299,16 +343,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 94.9%
     Validation accuracy: 91.2%
 
-
-
 ![png](img/Chapter10/output_20_5.png)
 
 
     Minibatch loss at step 1500: 10250.417969
     Minibatch accuracy: 98.0%
     Validation accuracy: 91.8%
-
-
 
 ![png](img/Chapter10/output_20_7.png)
 
@@ -317,16 +357,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 98.0%
     Validation accuracy: 91.7%
 
-
-
 ![png](img/Chapter10/output_20_9.png)
 
 
     Minibatch loss at step 2500: 7589.846680
     Minibatch accuracy: 98.8%
     Validation accuracy: 91.9%
-
-
 
 ![png](img/Chapter10/output_20_11.png)
 
@@ -335,16 +371,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 98.0%
     Validation accuracy: 91.7%
 
-
-
 ![png](img/Chapter10/output_20_13.png)
 
 
     Minibatch loss at step 3500: 5623.300293
     Minibatch accuracy: 99.6%
     Validation accuracy: 91.7%
-
-
 
 ![png](img/Chapter10/output_20_15.png)
 
@@ -353,16 +385,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 98.8%
     Validation accuracy: 91.8%
 
-
-
 ![png](img/Chapter10/output_20_17.png)
 
 
     Minibatch loss at step 4500: 4164.259277
     Minibatch accuracy: 98.8%
     Validation accuracy: 91.9%
-
-
 
 ![png](img/Chapter10/output_20_19.png)
 
@@ -371,16 +399,12 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 99.2%
     Validation accuracy: 92.0%
 
-
-
 ![png](img/Chapter10/output_20_21.png)
 
 
     Minibatch loss at step 5500: 3085.011230
     Minibatch accuracy: 99.6%
     Validation accuracy: 91.9%
-
-
 
 ![png](img/Chapter10/output_20_23.png)
 
@@ -389,14 +413,10 @@ with tf.Session(graph=graph) as session:
     Minibatch accuracy: 99.6%
     Validation accuracy: 91.7%
 
-
-
 ![png](img/Chapter10/output_20_25.png)
 
 
     Test accuracy: 92.0%
-
-
 
 ```python
 images = weights1.eval()
@@ -431,8 +451,9 @@ plt.show()
 
 ![png](img/Chapter10/output_23_0.png)
 
+<a name='Classification of MNIST'></a>
 
-### Classification of MNIST using Convolutional neural network with Keras
+#### Classification of MNIST using Convolutional neural network with Keras
 
 Let's implement the handwritten digits classification with Keras, again using dense FC layers only. This time we shall use one more hidden layer, along with a dropout layer. The next code block shows how to implement the classifier with a few lines of code using the keras.models Sequential() function. We can simply add the layers sequentially to the model. There are a couple of hidden layers introduced, with each of them having 200 nodes along with a dropout in between, with 15% dropout rate. This time, let's use the Adam optimizer (which uses momentum to accelerate SGD). Let's fit the model on the training dataset with 10 epochs (one pass over the entire input dataset). As can be seen, with this simple change in the architecture, an accuracy of 98.04% is obtained on the test images of MNIST
 
@@ -611,8 +632,9 @@ plt.show()
 
 ![png](img/Chapter10/output_30_0.png)
 
+<a name='Classification of MNIST using Convolutional'></a>
 
-### Classification of MNIST using Convolutional network with Keras
+#### Classification of MNIST using Convolutional network with Keras
 
 
 ```python
@@ -709,8 +731,6 @@ print("Accuracy: {} \n Error: {}".format(scores[1], 100-scores[1]*100))
     Accuracy: 0.989 
      Error: 1.0999999999999943
 
-
-
 ```python
 from keras.models import Model
 import matplotlib.pylab as plt
@@ -733,8 +753,9 @@ plt.show()
 
 ![png](img/Chapter10/output_33_1.png)
 
+<a name='Classification of MNIST using FC network with Keras'></a>
 
-### Classification of MNIST using FC network with Keras
+#### Classification of MNIST using FC network with Keras
 
 Let's implement the handwritten digits classification with Keras, again using dense FC layers only. This time we shall use one more hidden layer, along with a dropout layer. The next code block shows how to implement the classifier with a few lines of code using the keras.models Sequential() function. We can simply add the layers sequentially to the model. There are a couple of hidden layers introduced, with each of them having 200 nodes along with a dropout in between, with 15% dropout rate. This time, let's use the Adam optimizer (which uses momentum to accelerate SGD). Let's fit the model on the training dataset with 10 epochs (one pass over the entire input dataset). As can be seen, with this simple change in the architecture, an accuracy of 98.04% is obtained on the test images of MNIST
 
@@ -891,21 +912,27 @@ from keras.utils import plot_model
 plot_model(model, to_file='../images/keras_model.png')
 ```
 
-### Some popular deep CNNs
+<a name='Some popular deep CNNs'></a>
+
+#### Some popular deep CNNs
+
 In this section, let's discuss popular deep CNNs (for example, VGG-18/19, ResNet, and InceptionNet) used for image classification. The following screenshot shows single-crop accuracies (top-1 accuracy: how many times the correct label has the highest probability predicted by the CNN) of the most relevant entries submitted to the ImageNet challenge, from AlexNet (Krizhevsky et al., 2012), on the far left, to the best performing, Inception-v4 (Szegedy et al., 2016)
 
 
 
 ![png](images/ch-10-8.png)
 
-### VGG-16/19 
+<a name='VGG-16/19'></a>
+
+**VGG-16/19 **
+
 The following screenshot shows the architecture of a popular CNN called VGG-16/19. The remarkable thing about the VGG-16 net is that, instead of having so many hyper-parameters, it lets you use a much simpler network where you focus on just having convolutional layers that are just 3 x 3 filters with a stride of 1 and that always use the same padding and make all the max pooling layers 2 x 2 with a stride of 2. It is a really deep network.This network has a total of about 138 million parameters, as seen in the following diagram
 
 ![png](images/ch-10-9.png)
 
+<a name='Classifying Cat/Dog images using VGG-16 in Keras'></a>
 
-
-### Classifying Cat/Dog images using VGG-16 in Keras
+**Classifying Cat/Dog images using VGG-16 in Keras**
 
 * First download the compressed cats/dogs images train and test datasets from here: https://www.kaggle.com/c/dogs-vs-cats/data.
 * Then unzip the train.zip file under the **train** folder (should contain all the 25k train images) and test.zip file under the **test** folder (should contain all the test images).
@@ -979,19 +1006,13 @@ train_data = create_training_data()
 
     100%|██████████████████████████████████████████████████████████████████| 25000/25000 [03:38<00:00, 114.62it/s]
 
-
-
 ```python
 len(train_data)
 #train_data[0]
 ```
 
 
-
-
     25000
-
-
 
 
 ```python
@@ -1121,8 +1142,6 @@ print("Accuracy: {} \n Error: {}".format(scores[1], 100-scores[1]*100))
     # Accuracy: 0.7838 
     # Error: 21.61999999999999
 
-
-
 ```python
 from keras.models import Model
 import matplotlib.pylab as plt
@@ -1134,8 +1153,6 @@ print(model.input.shape, intermediate_output.shape)
 ```
 
     (?, 50, 50, 3) (20000, 50, 50, 64)
-
-
 
 ```python
 intermediate_layer_model = Model(inputs=model.input, outputs=model.get_layer('block1_conv2').output)
@@ -1161,8 +1178,6 @@ print(model.input.shape, intermediate_output.shape)
 ```
 
     (?, 50, 50, 3) (20000, 25, 25, 128)
-
-
 
 ```python
 fig = plt.figure(figsize=(10,10))
@@ -1235,8 +1250,10 @@ plt.show()
 
 ![png](img/Chapter10/output_63_0.png)
 
+<a name='InceptionNet'></a>
 
-### InceptionNet
+**InceptionNet**
+
 In the development of CNN classifiers, the inception network is a very important milestone. Before the inception network came into the picture, CNNs used to just stack the convolutional layers to the utmost depths in order to achieve better performance. Inception networks use complex techniques and tricks to meet performance both in terms of speed and accuracy. 
 
 Inception networks are evolving constantly and have led to the birth of several new versions of the network. Some of the popular versions are—Inception-v1, v2, v3, v4, and Inception-ResNet. Since there can be huge variations in salient parts and the location of information in images, choosing the right kernel size for the convolution operation becomes tough. A larger kernel is preferred for information that is distributed more globally, and a smaller kernel is preferred for information that is distributed more locally. Deep neural networks suffer from overfitting and vanishing gradient problems. Naively stacking large convolution operations will incur a lot of expenses.
@@ -1246,7 +1263,9 @@ The inception network solves all of the previous issues by adding filters that h
 ![png](images/ch-10-10.png)
 Several versions of the inception net have been introduced to the time of writing (V2, 3, and 4) that are extensions over the previous architecture. Keras provides Inception-v3 models that can be trained from scratch or a pre-trained version (with the weights obtained by training on ImageNet) can be used.
 
-### ResNet
+<a name='ResNet'></a>
+
+**ResNet**
 
 Simply stacking the layers won't necessarily increase the network depth. They are difficult to train because of the vanishing gradient problem as well. It is an issue wherein the gradient is backpropagated to previous layers and if this happens repeatedly, the gradient may become infinitely small. Hence, as we get deeper, performance gets heavily affected. 
 
@@ -1262,16 +1281,20 @@ Keras provides the ResNet50 model that can be trained from scratch or a pre-trai
 
 There are a few more architectures, such as AlexNet and MobileNet, that the reader is encouraged to explore (for example, from here: https://medium.com/@sidereal/cnns-architectures-lenet-alexnet-vgg-googlenet-resnet-and-more-666091488df5)
 
+<a name='Summary'></a>
+
 ### Summary
 In this chapter, the recent advances in image processing with deep learning models were introduced. We started by discussing the basic concepts of deep learning, how it's different from traditional ML, and why we need it. Then CNNs were introduced as deep neural networks designed particularly to solve complex image processing and computer vision tasks. The CNN architecture with convolutional, pooling, and FC layers were discussed. Next, we introduced TensorFlow and Keras, two popular deep learning libraries in Python. We showed how test accuracy on the MNIST dataset for handwritten digits classification can be increased with CNNs, then the same using FC layers only. Finally, we discussed a few popular networks such as VGG-16/19, GoogleNet, and ResNet. Kera's VGG-16 model was trained on Kaggle's Dogs vs. Cats competition images and we showed how it performs on the validation image dataset with decent accuracy.
 
-In the next chapter, we'll discuss how to solve more complex image processing tasks (for example, object detection, segmentation, and style transfer) with deep learning models and how to use transfer learning to save training time3
+In the next chapter, we'll discuss how to solve more complex image processing tasks (for example, object detection, segmentation, and style transfer) with deep learning models and how to use transfer learning to save training time
+
+<a name='Further reading'></a>
 
 ### Further reading
-- https://arxiv.org/pdf/1409.4842v1.pdf
-- http://cs231n.github.io/convolutional-networks/ 
-- https://arxiv.org/abs/1512.03385.pdf
-- https://arxiv.org/pdf/1605.07678.pdf
-- https://www.cs.toronto.edu/~frossard/post/vgg16/
-- https://pythonprogramming.net/convolutional-neural-network-kats-vs-dogs-machine-learning-tutorial/
+- [https://arxiv.org/pdf/1409.4842v1.pdf](https://arxiv.org/pdf/1409.4842v1.pdf)
+- [http://cs231n.github.io/convolutional-networks/ ](http://cs231n.github.io/convolutional-networks/ )
+- [https://arxiv.org/abs/1512.03385.pdf](https://arxiv.org/abs/1512.03385.pdf)
+- [https://arxiv.org/pdf/1605.07678.pdf](https://arxiv.org/pdf/1605.07678.pdf)
+- [https://www.cs.toronto.edu/~frossard/post/vgg16/](https://www.cs.toronto.edu/~frossard/post/vgg16/)
+- [https://pythonprogramming.net/convolutional-neural-network-kats-vs-dogs-machine-learning-tutorial/](https://pythonprogramming.net/convolutional-neural-network-kats-vs-dogs-machine-learning-tutorial/)
 
