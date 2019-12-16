@@ -6,6 +6,14 @@ permalink: /chapter-1/
 
 **Author: Sandipan Dey**
 
+#### Table of Content
+
+- [Reading, saving, and displaying an image using PIL](#Reading, saving)
+- [Reading, saving, and displaying an image using Matplotlib](#Reading, saving using Matplotlib)
+- [Interpolating while displaying with matplotlib imshow](#Interpolating while)
+- [Reading, saving, and displaying an image using scikit-image](#Reading using scikit-image)
+- [Using scikit-image's astronaut dataset](#Using scikit-image astronaut dataset)
+
 We recommend creating a folder (sub-directory) to store images to be used for processing (for example, for the Python code samples, we have used the images stored inside a folder named images) and then provide the path to the folder to access the image to avoid the file not found exception.
 
 ### Import libraries
@@ -54,6 +62,7 @@ import scipy
     /usr/local/lib/python3.5/dist-packages/skimage/viewer/__init__.py:6: UserWarning: Viewer requires Qt
       warn('Viewer requires Qt')
 
+<a name='Reading, saving'></a>
 
 ### Reading, saving, and displaying an image using PIL
 
@@ -78,6 +87,8 @@ im_g = im.convert('L') # convert the RGB color image to a grayscale image
 im_g.save('../images/parrot_gray.png') # save the image to disk
 pil.Image.open("../images/parrot_gray.png").show() # read the grayscale image from disk and show
 ```
+
+<a name='Reading, saving using Matplotlib'></a>
 
 ### Reading, saving, and displaying an image using Matplotlib
 
@@ -123,6 +134,7 @@ plt.show()
 
 ![png](img/Chapter1/output_15_0.png)
 
+<a name='Interpolating while'></a>
 
 ### Interpolating while displaying with matplotlib imshow
 
@@ -144,6 +156,7 @@ plt.show()
 
 ![png](img/Chapter1/output_18_0.png)
 
+<a name='Reading using scikit-image'></a>
 
 ### Reading, saving, and displaying an image using scikit-image
 
@@ -173,7 +186,7 @@ plt.axis('off'), skim_io.imshow(im), skim_io.show()
 
     ((0.0, 1.0, 0.0, 1.0), <matplotlib.image.AxesImage at 0x7f5a36e249e8>, None)
 
-
+<a name='Using scikit-image astronaut dataset'></a>
 
 ### Using scikit-image's astronaut dataset
 
