@@ -1,5 +1,5 @@
 ---
-layout: page
+ayout: page
 title: Chapter 11 Deep Learning - Object Detection, Segmentation, Transfer Learning and Neural Style Transfer
 permalink: /chapter-11/
 ---
@@ -67,9 +67,9 @@ Many of the ideas are from the two original YOLO papers, available at [this p
 ### Classifying and localizing images and detecting objects                                                       
 Let's first understand the concepts regarding classification, localization, detection, and object detection problems, how they can be transformed into supervised machine learning problems, and subsequently, how they can be solved using a deep convolution neural network.Refer to the following diagram:
 
-![png](images/ch-11-1.png)
-
-
+<div class="fig figcenter fighighlight">
+    <img src="images/ch-11-1.png" width="80%">
+</div>
 
 Here's what we can infer:
 - In the image classification problem, there is generally a (big) central object in an image and we have to recognize the object by assigning a correct label to the image. 
@@ -82,9 +82,11 @@ Here's what we can infer:
 
 - A typical output data vector will contain eight entries for a 4-class classification. As shown in the following diagram, the first entry will correspond to whether or not an object of any from the three classes of objects (except the background). If one is present in an image, the next four entries will define the bounding box containing the object, followed by three binary values for the three class labels indicating the class of the object. If none of the objects are present, the first entry will be 0 and the others will be ignored:
 
-  ![png](images/ch-11-2.png)
-
   
+
+  <div class="fig figcenter fighighlight">
+      <img src="images/ch-11-2.png" width="80%">
+  </div>
 
 <a name='Proposing and detecting objects using CNNs'></a>
 
@@ -112,13 +114,10 @@ The following are the steps that you must follow to be able to use the pre-train
 - Clone this repository: [go to here](https://github.com/allanzelener/YAD2K/), right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
 - Download the weights and cfg file [from here](https://pjreddie.com/darknet/yolo/) by clicking on the yellow links on the page, marked by red boxes here:
-   
-   
-
-![png](images/ch-11-3.png)
-    
-
-
+  
+  <div class="fig figcenter fighighlight">
+      <img src="images/ch-11-3.png" width="80%">
+  </div>
 
 - Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
 
@@ -130,15 +129,20 @@ The following are the steps that you must follow to be able to use the pre-train
     If executed successfully, it will create two files inside the YAD2K-master/model_data folder, namely, yolo.h5 and yolo.anchors.
 
 - Now go to the folder from where you want to run your code. Create a folder named yolo here and copy the four files (coco_classes, pascal_classes, yolo.h5, yolo.anchors) from the YAD2K-master/model_data folder to the yolo folder you created.
+
 - Copy the yad2k folder from the YAD2K-master folder to the current path. Your current path should have these two folders, yad2k and yolo, now. 
+
 - Create a new folder named images in the current path and put your input images here.
+
 - Create another new empty folder named output in the current path. The YOLO model will save the output images (with objects detected) here.
+
 - Create a .py script in the current path and copy-paste the following code and run (or run in from Jupyter Notebook cell from the current path). 
+
 - Double-check that the folder structure is exactly as shown in the following screenshot, with the required files present, before running the code:
 
-![png](images/ch-11-4.png)
-
-
+  <div class="fig figcenter fighighlight">
+      <img src="images/ch-11-4.png" width="25%">
+  </div>
 
 Let's first load all the required libraries, as shown in this code block:
 
