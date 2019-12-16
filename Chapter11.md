@@ -1,8 +1,6 @@
----
 ayout: page
 title: Chapter 11 Deep Learning - Object Detection, Segmentation, Transfer Learning and Neural Style Transfer
 permalink: /chapter-11/
----
 
 **Author: Sandipan Dey**
 
@@ -82,10 +80,8 @@ Here's what we can infer:
 
 - A typical output data vector will contain eight entries for a 4-class classification. As shown in the following diagram, the first entry will correspond to whether or not an object of any from the three classes of objects (except the background). If one is present in an image, the next four entries will define the bounding box containing the object, followed by three binary values for the three class labels indicating the class of the object. If none of the objects are present, the first entry will be 0 and the others will be ignored:
 
-  
-
   <div class="fig figcenter fighighlight">
-      <img src="images/ch-11-2.png" width="80%">
+    <img src="/images/ch-11-2.jpg" width="80%">
   </div>
 
 <a name='Proposing and detecting objects using CNNs'></a>
@@ -116,7 +112,7 @@ The following are the steps that you must follow to be able to use the pre-train
 - Download the weights and cfg file [from here](https://pjreddie.com/darknet/yolo/) by clicking on the yellow links on the page, marked by red boxes here:
   
   <div class="fig figcenter fighighlight">
-      <img src="images/ch-11-3.png" width="80%">
+      <img src="/images/ch-11-3.jpg" width="80%">
   </div>
 
 - Save the yolov2.cfg and the yolov2.weights files downloaded inside the YAD2K-master folder.
@@ -141,7 +137,7 @@ The following are the steps that you must follow to be able to use the pre-train
 - Double-check that the folder structure is exactly as shown in the following screenshot, with the required files present, before running the code:
 
   <div class="fig figcenter fighighlight">
-      <img src="images/ch-11-4.png" width="25%">
+      <img src="/images/ch-11-4.jpg" width="25%">
   </div>
 
 Let's first load all the required libraries, as shown in this code block:
@@ -588,11 +584,15 @@ DeepLab presents an architecture for controlling signal decimation and learning 
 ### DeepLab v3 architecture                                                        
 The image shows the parallel modules with atrous convolution:
 
-![png](images/ch-11-5.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-5.jpg" width="80%">
+</div>
 
 With DeepLab-v3+, the DeepLab-v3 model is extended by adding a simple, yet effective, decoder module to refine the segmentation results, especially along object boundaries. The depth-wise separable convolution is applied to both atrous spatial pyramid pooling and decoder modules, resulting in a faster and stronger encoder-decoder network for semantic segmentation. The architecture is shown in the following diagram:
 
-![png](images/ch-11-6.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-6.jpg" width="80%">
+</div>
 
 <a name='Steps you must follow to use DeepLab'></a>
 
@@ -640,9 +640,9 @@ os.chdir('..')
 
 You can obtain the labels of the segments and create an overlay with yet another input image, as shown in the following diagram:
 
-![png](images/ch-11-7.png)
-
-
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-7.jpg" width="80%">
+</div>
 
 <a name='Transfer Learning what it is, and when to use it'></a>
 
@@ -651,7 +651,9 @@ Transfer learning is a deep learning strategy that reuses knowledge gained from 
 
 The following image shows how the flower images are classified wrongly by the pre-trained VGG16 model (the code is left to the reader as an exercise):
 
-![png](images/ch-11-8.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-8.jpg" width="80%">
+</div>
 
 <a name='Transfer learning with Keras'></a>
 
@@ -659,7 +661,9 @@ The following image shows how the flower images are classified wrongly by the pr
 
 Training of pre-trained models is done on many comprehensive image classification problems. The convolutional layers act as a feature extractor, and the fully connected (FC) layers act as classifiers, as shown in the following diagram, in the context of cat vs. dog image classification with a conv net:
 
-![png](images/ch-11-9.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-9.jpg" width="80%">
+</div>
 
 Since the standard models, such as VGG-16/19, are quite large and are trained on many images, they are capable of learning many different features for different classes. We can simply reuse the convolutional layers as a feature extractor that learns low and high level image features, and train only the FC layer weights (parameters). This is what transfer learning is.
 
@@ -667,9 +671,9 @@ We can use transfer learning when we have a training set that is concise, and th
 
 Now, let's use transfer learning to classify rose, sunflower and tulip flower images. These images are obtained from the TensorFlow sample image dataset, available at [here](http://download.tensorflow.org/example_images/flower_photos.tgz). Let's use 550 images for each of the three classes, making a total of 1,650 images, which is a small number of images and the right place to use transfer learning. We'll use 500 images from each class for training, reserving the remaining 50 images from each class for validation. Also, let's create a folder called flower_photos, with two sub-folders, train and valid, inside it, and save our training and validation images inside those folders, respectively. The folder structure should look such as the following:
 
-![png](images/ch-11-10.png)
-
-
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-10.jpg" width="80%">
+</div>
 
 We will first load the weights of the convolution layers only for the pre-trained VGG16 model (with include_top=False, let's not load the last two FC layers), which will act as our classifier. Note that the last layer has a shape of 7 x 7 x 512.
 
@@ -696,8 +700,6 @@ vgg_conv = VGG16(weights='imagenet',
 ```
 
     Using TensorFlow backend.
-
-
 
 ```python
 import numpy as np
@@ -889,7 +891,9 @@ The NST algorithm uses these parameters to create a third, generated image (G).
 
 Here is an example of what we will actually be doing: 
 
-![png](images/ch-11-11.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-11.jpg" width="80%">
+</div>
 
 Surprised? I hope you liked the filter applied on the Mona Lisa! Excited to implement this? Let's do it with transfer learning. 
 
@@ -914,7 +918,9 @@ We are going to get more visually pleasing outputs if we choose the middle layer
 
 The content loss or feature reconstruction loss (which we want to minimize) can be represented as the following:
 
-![png](images/ch-11-12.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-12.jpg" width="80%">
+</div>
 
 Here, nW, nH, and nC are width, height, and number of channels in the chosen hidden layer, respectively. In practice, the following happens:
 
@@ -926,11 +932,15 @@ We first need to compute the style, or Gram matrix, by computing the matrix of d
 
 The style loss for the hidden layer a can be represented as the following:
 
-![png](images/ch-11-13.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-13.jpg" width="80%">
+</div>
 
 We want to minimize the distance between the Gram matrices for the images S and G. The overall weighted style loss (which we want to minimize) is represented as the following:
 
-![png](images/ch-11-14.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-14.jpg" width="80%">
+</div>
 
 Here, λ represents the weights for different layers. Bear the following in mind:
 
@@ -940,7 +950,9 @@ Here, λ represents the weights for different layers. Bear the following in mi
 ### Computing the overall loss                                                        
 A cost function that minimizes both the style and the content cost is the following:
 
-![png](images/ch-11-15.png)
+<div class="fig figcenter fighighlight">
+    <img src="/images/ch-11-15.jpg" width="80%">
+</div>
 
 Sometimes, to encourage spatial smoothness in the output image G, a total variation regularizer TV(G) is also added to the RHS convex combination.
 
