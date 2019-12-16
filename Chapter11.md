@@ -60,7 +60,7 @@ YOLO, is a very popular and fully conventional algorithm that is used for detect
 
 In this section, we will detect objects in images with a fully convolutional network (FCN) deep learning model. Given an image with some objects (for example, animals, cars, and so on), the goal is to detect objects in those images using a pre-trained YOLO model, with bounding boxes.
 
-Many of the ideas are from the two original YOLO papers, available at https://arxiv.org/abs/1506.02640 and https://arxiv.org/abs/1612.08242. But before diving into the YOLO model, let's first understand some prerequisite fundamental concepts.
+Many of the ideas are from the two original YOLO papers, available at [this paper](https://arxiv.org/abs/1506.02640 and (this](https://arxiv.org/abs/1612.08242). But before diving into the YOLO model, let's first understand some prerequisite fundamental concepts.
 
 <a name='Classifying and localizing images and detecting objects'></a>
 
@@ -594,7 +594,7 @@ With DeepLab-v3+, the DeepLab-v3 model is extended by adding a simple, yet effec
 
 ### Steps you must follow to use DeepLab V3+ model for semantic segmentation
 Here are the steps that must be followed to be able to use the model to segment an image:
-1. First, clone or download the repository from https://github.com/bonlime/keras-deeplab-v3-plus.
+1. First, clone or download the repository from [here](https://github.com/bonlime/keras-deeplab-v3-plus).
 2. Extract the ZIP file downloaded to the keras-deeplab-v3-plus-master folder.
 3. Navigate to the keras-deeplab-v3-plus-master folder; the following code needs to be run from inside the directory.
 
@@ -643,7 +643,7 @@ You can obtain the labels of the segments and create an overlay with yet anothe
 <a name='Transfer Learning what it is, and when to use it'></a>
 
 ### Transfer Learning what it is, and when to use it 
-Transfer learning is a deep learning strategy that reuses knowledge gained from solving one problem by applying it to a different, but related, problem. For example, let's say we have three types of flowers, namely, a rose, a sunflower, and a tulip. We can use the standard pre-trained models, such as VGG16/19, ResNet50, or InceptionV3 models (pre-trained on ImageNet with 1000 output classes, which can be found at https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a) to classify the flower images, but our model wouldn't be able to correctly identify them because these flower categories were not learned by the models. In other words, they are classes that the model is not aware of.
+Transfer learning is a deep learning strategy that reuses knowledge gained from solving one problem by applying it to a different, but related, problem. For example, let's say we have three types of flowers, namely, a rose, a sunflower, and a tulip. We can use the standard pre-trained models, such as VGG16/19, ResNet50, or InceptionV3 models (pre-trained on ImageNet with 1000 output classes, which can be found at [here](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a) to classify the flower images, but our model wouldn't be able to correctly identify them because these flower categories were not learned by the models. In other words, they are classes that the model is not aware of.
 
 The following image shows how the flower images are classified wrongly by the pre-trained VGG16 model (the code is left to the reader as an exercise):
 
@@ -661,7 +661,7 @@ Since the standard models, such as VGG-16/19, are quite large and are trained o
 
 We can use transfer learning when we have a training set that is concise, and the problem that we are dealing with is the same as that on which the pre-trained model was trained. We can tweak the convolutional layers if we have ample data, and learn all the model parameters from scratch so that we can train the models to learn more robust features relevant to our problem. 
 
-Now, let's use transfer learning to classify rose, sunflower and tulip flower images. These images are obtained from the TensorFlow sample image dataset, available at http://download.tensorflow.org/example_images/flower_photos.tgz. Let's use 550 images for each of the three classes, making a total of 1,650 images, which is a small number of images and the right place to use transfer learning. We'll use 500 images from each class for training, reserving the remaining 50 images from each class for validation. Also, let's create a folder called flower_photos, with two sub-folders, train and valid, inside it, and save our training and validation images inside those folders, respectively. The folder structure should look such as the following:
+Now, let's use transfer learning to classify rose, sunflower and tulip flower images. These images are obtained from the TensorFlow sample image dataset, available at [here](http://download.tensorflow.org/example_images/flower_photos.tgz). Let's use 550 images for each of the three classes, making a total of 1,650 images, which is a small number of images and the right place to use transfer learning. We'll use 500 images from each class for training, reserving the remaining 50 images from each class for validation. Also, let's create a folder called flower_photos, with two sub-folders, train and valid, inside it, and save our training and validation images inside those folders, respectively. The folder structure should look such as the following:
 
 ![png](images/ch-11-10.png)
 
@@ -673,7 +673,7 @@ We will use the ImageDataGenerator class to load the images, and the flow_from_
 
 That being said, let's implement transfer learning with Keras to train the VGG16 model partially—that is, it will just learn the weights for the FC layers only on the training images we have, and then use it to predict the classes:
 
-* First download the TensorFlow sample image dataset, available at http://download.tensorflow.org/example_images/flower_photos.tgz and unzip.
+* First download the TensorFlow sample image dataset, available at [here](http://download.tensorflow.org/example_images/flower_photos.tgz) and unzip.
 * Select 500 roses, sunflowers and tulip images each and put them in the **train** folder
 * Select 50 roses, sunflowers and tulip images each and put them in the **valid** folder
 
@@ -945,7 +945,7 @@ In this section, however, we shall not use transfer learning. If you are interes
 <a name='Neural style transfer with Python and OpenCV'></a>
 
 ### Neural style transfer with Python and OpenCV                                                        
-Let's first download the pre-trained Torch model from https://github.com/DmitryUlyanov/online-neural-doodle/blob/master/pretrained/starry_night.t7 and save it in the current folder (where we are planning to run the following code from). Create a folder named output on the current path to save the generated image by the model.
+Let's first download the pre-trained Torch model from [github repository](https://github.com/DmitryUlyanov/online-neural-doodle/blob/master/pretrained/starry_night.t7) and save it in the current folder (where we are planning to run the following code from). Create a folder named output on the current path to save the generated image by the model.
 
 The next code block demonstrates how to perform an NST (with Starry Night style) to an input content image. First, use the cv2.dnn.readNetFromTorch() function to load the pre-trained model.
 
