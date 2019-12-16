@@ -109,13 +109,13 @@ To reduce the computational expense in training the YOLO model, we will be using
 
 #### Using a pre-trained YOLO model for object detection                                                        
 The following are the steps that you must follow to be able to use the pre-trained model:
-1. Clone this repository: go to https://github.com/allanzelener/YAD2K/, right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
+1. Clone this repository: [go to here](https://github.com/allanzelener/YAD2K/), right-click on clone or download, and select the path where you want to download the ZIP. Then unzip the compressed file to YAD2K-master folder.
 
-2. Download the weights and cfg file from https://pjreddie.com/darknet/yolo/ by clicking on the yellow links on the page, marked by red boxes here:
+2. Download the weights and cfg file [from here](https://pjreddie.com/darknet/yolo/) by clicking on the yellow links on the page, marked by red boxes here:
    
    
 
-![png](images/ch-11-3.png)
+<img src="images/ch-11-3.png">
     
 
 
