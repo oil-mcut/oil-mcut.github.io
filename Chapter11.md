@@ -664,7 +664,7 @@ The following image shows how the flower images are classified wrongly by the pr
 Training of pre-trained models is done on many comprehensive image classification problems. The convolutional layers act as a feature extractor, and the fully connected (FC) layers act as classifiers, as shown in the following diagram, in the context of cat vs. dog image classification with a conv net:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-9.jpg" width="80%">
+    <img src="/images/ch-11-9.jpg" width="60%">
 </div>
 
 Since the standard models, such as VGG-16/19, are quite large and are trained on many images, they are capable of learning many different features for different classes. We can simply reuse the convolutional layers as a feature extractor that learns low and high level image features, and train only the FC layer weights (parameters). This is what transfer learning is.
@@ -674,7 +674,7 @@ We can use transfer learning when we have a training set that is concise, and th
 Now, let's use transfer learning to classify rose, sunflower and tulip flower images. These images are obtained from the TensorFlow sample image dataset, available at [here](http://download.tensorflow.org/example_images/flower_photos.tgz). Let's use 550 images for each of the three classes, making a total of 1,650 images, which is a small number of images and the right place to use transfer learning. We'll use 500 images from each class for training, reserving the remaining 50 images from each class for validation. Also, let's create a folder called flower_photos, with two sub-folders, train and valid, inside it, and save our training and validation images inside those folders, respectively. The folder structure should look such as the following:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-10.jpg" width="80%">
+    <img src="/images/ch-11-10.jpg" width="25%">
 </div>
 
 We will first load the weights of the convolution layers only for the pre-trained VGG16 model (with include_top=False, let's not load the last two FC layers), which will act as our classifier. Note that the last layer has a shape of 7 x 7 x 512.
@@ -921,7 +921,7 @@ We are going to get more visually pleasing outputs if we choose the middle layer
 The content loss or feature reconstruction loss (which we want to minimize) can be represented as the following:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-12.jpg" width="80%">
+    <img src="/images/ch-11-12.jpg" width="40%">
 </div>
 
 Here, nW, nH, and nC are width, height, and number of channels in the chosen hidden layer, respectively. In practice, the following happens:
@@ -935,13 +935,13 @@ We first need to compute the style, or Gram matrix, by computing the matrix of d
 The style loss for the hidden layer a can be represented as the following:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-13.jpg" width="80%">
+    <img src="/images/ch-11-13.jpg" width="40%">
 </div>
 
 We want to minimize the distance between the Gram matrices for the images S and G. The overall weighted style loss (which we want to minimize) is represented as the following:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-14.jpg" width="80%">
+    <img src="/images/ch-11-14.jpg" width="40%">
 </div>
 
 Here, λ represents the weights for different layers. Bear the following in mind:
@@ -953,7 +953,7 @@ Here, λ represents the weights for different layers. Bear the following in mi
 A cost function that minimizes both the style and the content cost is the following:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-11-15.jpg" width="80%">
+    <img src="/images/ch-11-15.jpg" width="40%">
 </div>
 
 Sometimes, to encourage spatial smoothness in the output image G, a total variation regularizer TV(G) is also added to the RHS convex combination.
