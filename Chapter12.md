@@ -58,15 +58,15 @@ Seam carving is a content-aware image resizing technique where the image is redu
 
 Now it is now a core feature in Adobe Photoshop and other computer graphics applications. Unlike standard content-agnostic resizing techniques, such as cropping and scaling, seam carving preserves the most interesting features of the image, such as aspect ratio, set of objects present, and so on. Finding and removing a seam involves three parts:
 
-1. **Energy calculation**: The first step is to calculate the energy of a pixel, which is a measure of its importance—the higher the energy, the less likely that the pixel will be included as part of a seam. For example, the dual-gradient energy function can be used for energy computation.
+- **Energy calculation**: The first step is to calculate the energy of a pixel, which is a measure of its importance—the higher the energy, the less likely that the pixel will be included as part of a seam. For example, the dual-gradient energy function can be used for energy computation.
 
-2. **Seam identification**: The next step is to find a vertical or horizontal seam of minimum total energy. This is similar to the classic shortest path problem in an edge-weighted digraph, with the important difference that the weights are on the vertices instead of the edges. The goal is to find the shortest path from any of the W pixels in the top row to any of the W pixels in the bottom row. The digraph is acyclic, where there is a downward edge from pixel (x, y) to pixels (x − 1, y + 1), (x, y + 1), and (x + 1, y + 1), assuming that the coordinates are in the prescribed ranges. Also, seams cannot wrap around the image. The optimal seam can be found using dynamic programming. The first step is to traverse the image from the second row to the last row and compute the cumulative minimum energy, M, for all possible connected seams for each pixel (i, j), as follows: 
+- **Seam identification**: The next step is to find a vertical or horizontal seam of minimum total energy. This is similar to the classic shortest path problem in an edge-weighted digraph, with the important difference that the weights are on the vertices instead of the edges. The goal is to find the shortest path from any of the W pixels in the top row to any of the W pixels in the bottom row. The digraph is acyclic, where there is a downward edge from pixel (x, y) to pixels (x − 1, y + 1), (x, y + 1), and (x + 1, y + 1), assuming that the coordinates are in the prescribed ranges. Also, seams cannot wrap around the image. The optimal seam can be found using dynamic programming. The first step is to traverse the image from the second row to the last row and compute the cumulative minimum energy, M, for all possible connected seams for each pixel (i, j), as follows: 
 
   <div class="fig figcenter fighighlight">
       <img src="/images/ch-12-1.jpg" width="40%">
   </div>
 
-3. **Seam removal**: The final step is to remove from the image all of the pixels along the vertical or horizontal seam.
+- **Seam removal**: The final step is to remove from the image all of the pixels along the vertical or horizontal seam.
 
 In the following two subsections, we'll discuss a couple of applications of the seam carving technique, the first one being content-aware image resizing, and the second one being object removal from images. The implementations of these will be done with scikit-image library's transform module's functions.
 
@@ -105,7 +105,7 @@ plt.imshow(img)
     <matplotlib.image.AxesImage at 0x1b4fe1fe748>
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_4_2.jpg" width="80%">
+    <img src="/img/Chapter12/output_4_2.jpg" width="50%">
 </div>
 
 ```python
@@ -125,7 +125,7 @@ plt.imshow(resized)
     <matplotlib.image.AxesImage at 0x1b4fe06bda0>
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_5_3.jpg" width="80%">
+    <img src="/img/Chapter12/output_5_3.jpg" width="50%">
 </div>
 
 ```python
@@ -141,7 +141,7 @@ plt.imshow(out)
     <matplotlib.image.AxesImage at 0x1b480c19e80>
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_6_1.jpg" width="80%">
+    <img src="/img/Chapter12/output_6_1.jpg" width="50%">
 </div>
 
 <a name='Object removal with seam carving'></a>
@@ -168,7 +168,7 @@ plt.subplot(122), plt.imshow(mask_img), plt.title('Mask for the object to be rem
      <matplotlib.text.Text at 0x1b480db4160>)
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_8_2.jpg" width="40%">
+    <img src="/img/Chapter12/output_8_2.jpg" width="70%">
 </div>
 
 ```python
@@ -297,7 +297,7 @@ plt.show()
     [0. 1.]
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_14_1.jpg" width="40%">
+    <img src="/img/Chapter12/output_14_1.jpg" width="70%">
 </div>
 
 ```python
@@ -314,7 +314,7 @@ In this section, we shall very briefly discuss variational methods in image proc
 The following diagram describes the basic steps in an image processing task, represented as a variational optimization problem. First, we need to create an energy functional E that describes the quality of the input image u. Then, with the Euler-Lagrange equation, we need to calculate the first variation. Next, we need to set up a partial differentail equation (PDE) for the steepest descent minimization and discretize it and evolve towards the minimum:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-12-5.jpg" width="80%">
+    <img src="/images/ch-12-5.jpg" width="60%">
 </div>
 
 <a name='Total Variation Denoising'></a>
@@ -324,7 +324,7 @@ The following diagram describes the basic steps in an image processing task, rep
 The following shows the linear and non-linear Total Variation Denoising algorithms. As can be observed in the following, the energy functional is the only difference:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-12-6.jpg" width="70%">
+    <img src="/images/ch-12-6.jpg" width="50%">
 </div>
 
 Let's demonstrate an implementation of total variation denoising using the scikit-image library's restoration module. The principle of total variation denoising is to minimize the total variation of the image, which can be roughly described as the integral of the norm of the image gradient. First, let's create a noisy input image by adding random Gaussian noise with the original input image. Next, let's use the denoise_tv_chambolle() function to do the denoising. Since we are using a grayscale input image, we do not need to set the multichannel parameter (by default it is set to False) to this function:
@@ -373,7 +373,7 @@ plt.show()
 ```
 
 <div class="fig figcenter fighighlight">
-    <img src="/img/Chapter12/output_20_0.jpg" width="75%">
+    <img src="/img/Chapter12/output_20_0.jpg" width="65%">
 </div>
 
 <a name='Image quilting'></a>
@@ -398,7 +398,7 @@ Texture synthesis refers to the creation of a larger texture image from a small
 Texture transfer refers to giving an object the appearance of having the same texture as a sample, while still preserving its basic shape. Texture transfer is achieved by encouraging sampled patches to have a similar appearance to a given target image, as well as matching overlapping regions of already sampled patches. The following screenshot shows the output generated by the algorithm for texture transfer:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-12-8.jpg" width="75%">
+    <img src="/images/ch-12-8.jpg" width="55%">
 </div>
 
 <a name='Face morphing'></a>
@@ -419,12 +419,8 @@ Let's conclude the last chapter by discussing a sophisticated face morphing tech
 The implementation of this algorithm is left to the reader. The following figure shows a face morphing implementation with the PyStasm library. The images in the first row are the source and the target images, and the last row shows two intermediate average face images. As can be seen, using this implementation, the morphing is very smooth and visually pleasing:
 
 <div class="fig figcenter fighighlight">
-    <img src="/images/ch-12-9.jpg" width="75%">
+    <img src="/images/ch-12-9.jpg" width="65%">
 </div>
-
-![png](images/ch-12-9.png)
-
-
 
 <a name='Summary'></a>
 
