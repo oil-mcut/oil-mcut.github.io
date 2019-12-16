@@ -1046,10 +1046,10 @@ In this chapter, we first provided a basic introduction to image processing and 
 ### Further reading
 
 - Digital Image Processing, a book by Rafael C. Gonzalez and Richard E. Woods for image processing concepts
-- The lecture notes / handouts from this (https://web.stanford.edu/class/ee368/handouts.html) course from Stanford University and this (https://ocw.mit.edu/resources/res-2-006-girls-who-build-cameras-summer-2016/) one from MIT
-- http://scikit-image.org/docs/dev/api/skimage.html
-- https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
-https://docs.scipy.org/doc/scipy-1.1.0/reference/ndimage.html
-- https://matplotlib.org/galleryhttp://members.cbio.mines-paristech.fr/~nvaroquaux/formations/scipy-lecture-notes/advanced/image_processing/index.html
-- http://www.scipy-lectures.org/https://web.cs.wpi.edu/~emmanuel/courses/cs545/S14/slides/lecture09.pdfhttp://fourier.eng.hmc.edu/e161/lectures/e161ch1.pdfhttp://www.eie.polyu.edu.hk/~enyhchan/imagef.pdf
-- http://www.cs.cornell.edu/courses/cs1114/2009sp/lectures/CS1114-lec14.pdfhttp://eeweb.poly.edu/~yao/EL5123/lecture12_ImageWarping.pdf
+- [The lecture notes / handouts from this course from Stanford University](https://web.stanford.edu/class/ee368/handouts.html) and [this one from MIT](https://ocw.mit.edu/resources/res-2-006-girls-who-build-cameras-summer-2016/) 
+- [scikit image](http://scikit-image.org/docs/dev/api/skimage.html)
+- [pillow](https://pillow.readthedocs.io/en/3.1.x/reference/Image.html)
+- [scipy](https://docs.scipy.org/doc/scipy-1.1.0/reference/ndimage.html)
+- [matplotlib](https://matplotlib.org/galleryhttp://members.cbio.mines-paristech.fr/~nvaroquaux/formations/scipy-lecture-notes/advanced/image_processing/index.html)
+- [scipy lecture](http://www.scipy-lectures.org/https://web.cs.wpi.edu/~emmanuel/courses/cs545/S14/slides/lecture09.pdfhttp://fourier.eng.hmc.edu/e161/lectures/e161ch1.pdfhttp://www.eie.polyu.edu.hk/~enyhchan/imagef.pdf)
+- [teaching material cs cornell](http://www.cs.cornell.edu/courses/cs1114/2009sp/lectures/CS1114-lec14.pdfhttp://eeweb.poly.edu/~yao/EL5123/lecture12_ImageWarping.pdf)
