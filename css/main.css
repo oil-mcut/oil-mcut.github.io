@@ -95,7 +95,6 @@ a:visited { color: #205caa; }
   color: #818181;
 }
 
-
 /* Post styles */
 /* ----------------------------------------------------------*/
 
@@ -117,7 +116,6 @@ a:visited { color: #205caa; }
 .post-content { margin: 0 0 30px; }
 
 .post-content > * { margin: 20px 0; }
-
 
 .post-content h1,
 .post-content h2,
@@ -291,8 +289,8 @@ a:visited { color: #205caa; }
 .fighighlight {
   /* background-color: #f7f6f1; */
   padding: 20px 4px 20px 4px;
-  border-bottom: 1px solid #999;
-  border-top: 1px solid #999;
+  /* border-bottom: 1px solid #999; */
+  /* border-top: 1px solid #999; */
   /* box-shadow: 0px 2px 5px #CCC, 0px -2px 5px #CCC; */
 }
 .figcaption {

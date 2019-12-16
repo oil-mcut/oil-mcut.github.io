@@ -444,11 +444,9 @@ pylab.show()
     giraffe 0.94 (388, 119) (554, 415)
     giraffe 0.95 (205, 111) (388, 463)
 
-
-
-![png](img/Chapter11/output_7_2.png)
-
-
+<div class="fig figcenter fighighlight">
+    <img src="/img/Chapter11/output_7_2.jpg" width="80%">
+</div>
 
 ```python
 # for jupyter notebook uncomment the following line of code
@@ -637,8 +635,9 @@ pylab.close()
 os.chdir('..')
 ```
 
-
-![png](img/Chapter11/output_17_0.png)
+<div class="fig figcenter fighighlight">
+    <img src="/img/Chapter11/output_17_0.jpg" width="80%">
+</div>
 
 You can obtain the labels of the segments and create an overlay with yet another input image, as shown in the following diagram:
 
@@ -870,12 +869,13 @@ for i in range(len(errors)):
 plt.show()
 ```
 
+<div class="fig figcenter fighighlight">
+    <img src="/img/Chapter11/output_32_0.jpg" width="80%">
+</div>
 
-![png](img/Chapter11/output_32_0.png)
-
-
-
-![png](img/Chapter11/output_32_1.png)
+<div class="fig figcenter fighighlight">
+    <img src="/img/Chapter11/output_32_1.jpg" width="80%">
+</div>
 
 <a name='Neural style transfers with cv2 using a pre-trained torch model'></a>
 
