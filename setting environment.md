@@ -39,7 +39,6 @@ This project helps one to easily benefit from a fully packaged for running teach
 This docker image running Ubuntu operating system (OS) include package library and framework for doing machine learning program with setting user Interface application. this image can work properly in **windows** or in **Linux**.
 
 #### Specs:
-
 - ipykernel==5.1.1
 - ipython==7.7.0
 - jupyter==1.0.0
@@ -74,6 +73,7 @@ This docker image running Ubuntu operating system (OS) include package library a
    ```
 
 **B. On Linux**
+You can install Docker Engine - Community for linux following the reference from [Docker Documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/). 
 
 1. Open a terminal
 
