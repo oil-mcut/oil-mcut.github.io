@@ -73,6 +73,7 @@ This docker image running Ubuntu operating system (OS) include package library a
    ```
 
 **B. On Linux**
+
 You can install Docker Engine - Community for linux following the reference from [Docker Documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/). 
 
 1. Open a terminal
